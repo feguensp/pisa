@@ -1,0 +1,234 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 10px 5px 0 5px;
+    /* Para separarlos un poco */
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+
+.pregunta {
+    display: none;
+}
+
+.pregunta.activa {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;
+}
+
+td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    /*text-align: center;*/
+
+}
+
+footer {
+    position: auto;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Fondo semi-transparente */
+    font-size: 0.9em;
+    color: #7f8c8d;
+    /* Color del texto suave */
+    font-weight: 300;
+    /* Texto más delgado */
+    font-size: small;
+}
+
+footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.container1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.container2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    text-align: center;
+}
+
+.item {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.cuadro-curveado {
+    border: 2px solid #ddd;
+    /* Borde suave */
+    border-radius: 15px;
+    /* Esquinas curveadas */
+    padding: 20px;
+    /* Espaciado interno */
+    background-color: #fff;
+    /* Fondo blanco */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    margin: 20px auto;
+    /* Centrado horizontal */
+    text-align: left;
+    /* Alineación del texto a la izquierda */
+    max-width: 800px;
+    /* Máximo ancho */
+    width: auto;
+    /* Ancho automático */
+}
+
+/* Centrar la imagen dentro del cuadro-curveado */
+.cuadro-curveado img {
+    display: block;
+    /* Hace que la imagen sea un bloque */
+    margin: 0 auto 10px auto;
+    /* Centra la imagen horizontalmente y añade margen inferior */
+}
+
+/* Justificar el texto a la izquierda */
+.cuadro-curveado p {
+    text-align: left;
+    /* Justifica el texto a la izquierda */
+    margin: 0 0 10px 0;
+    /* Añade margen inferior a los párrafos */
+}
+
+/* Alinear la lista a la izquierda */
+.cuadro-curveado ul {
+    text-align: left;
+    /* Alinea el texto de la lista a la izquierda */
+    margin: 0;
+    /* Elimina el margen predeterminado de la lista */
+    padding-left: 20px;
+    /* Añade un padding a la izquierda para la sangría */
+}
+
+.cuadro-curveado ul li {
+    margin-bottom: 10px;
+}
+
+td:first-child,
+th:first-child {
+    width: 5%;
+}
+
+td input[type="radio"] {
+    margin: 0 auto;
+    display: block;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #2C3E50;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #E74C3C;
+    margin: 10px auto 0;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #34495E;
+    text-align: center;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+#progressBarContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.step {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 0 2px;
+    background-color: white;
+    transition: background-color 0.3s;
+}
+
+.passed {
+    background-color: #a2d5f2;
+}
+
+.current {
+    background-color: #007BFF;
+}

@@ -1,0 +1,2542 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba de Rendimiento - Final</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #2C3E50;
+      text-align: center;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #E74C3C;
+      margin: 10px auto 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 400;
+      font-style: italic;
+      /* Texto en cursiva */
+      color: #34495E;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 10px 5px 0 5px;
+      /* Para separarlos un poco */
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 10px 0;
+    }
+
+    .pregunta {
+      display: none;
+    }
+
+    .pregunta.activa {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    /* Footer (derechos de autor) */
+    footer {
+      position: auto;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      /* Fondo semi-transparente */
+      font-size: 0.9em;
+      color: #7f8c8d;
+      /* Color del texto suave */
+      font-weight: 300;
+      /* Texto más delgado */
+      font-size: small;
+    }
+
+    footer a {
+      color: #3498db;
+      /* Color del enlace */
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      /* Subrayado al pasar el mouse */
+    }
+
+    .container1 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .item {
+      text-align: center;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      width: 200px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin: 8px 0;
+    }
+
+    .cuadro-curveado {
+      border: 2px solid #ddd;
+      /* Borde suave */
+      border-radius: 15px;
+      /* Esquinas curveadas */
+      padding: 20px;
+      /* Espaciado interno */
+      background-color: #fff;
+      /* Fondo blanco */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      /* Sombra suave, como en .container */
+      margin: 20px 0;
+      /* Margen superior e inferior */
+      text-align: left;
+      /* Alineación del texto */
+      width: auto;
+      /* Ancho completo */
+      max-width: 800px;
+      /* Máximo ancho, igual que .container */
+      margin-left: auto;
+      /* Centrado horizontal */
+      margin-right: auto;
+    }
+
+    .cuadrado {
+      border: 2px solid #ddd;
+      /* Borde suave */
+      border-radius: 2px;
+      /* Esquinas curveadas */
+      padding: 20px;
+      /* Espaciado interno */
+      background-color: #fff;
+      /* Fondo blanco */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      /* Sombra suave, como en .container */
+      margin: 20px 0;
+      /* Margen superior e inferior */
+      text-align: left;
+      /* Alineación del texto */
+      width: auto;
+      /* Ancho completo */
+      max-width: 800px;
+      /* Máximo ancho, igual que .container */
+      margin-left: auto;
+      /* Centrado horizontal */
+      margin-right: auto;
+    }
+
+    .cuadro-curveado ul {
+      text-align: left;
+      /* Alinea el texto de la lista a la izquierda */
+      margin: 0;
+      /* Elimina el margen predeterminado de la lista */
+      padding-left: 20px;
+      /* Añade un padding a la izquierda para la sangría */
+    }
+
+    .cuadro-curveado ul li {
+      margin-bottom: 10px;
+      /* Espaciado entre elementos de la lista */
+    }
+
+    /* Centrar la imagen dentro del cuadro-curveado */
+    .cuadro-curveado img {
+      display: block;
+      /* Hace que la imagen sea un bloque */
+      margin: 0 auto 10px auto;
+      /* Centra la imagen horizontalmente y añade margen inferior */
+    }
+
+    .cuadro-curveado video {
+      display: block;
+      /* Hace que la imagen sea un bloque */
+      margin: 0 auto 10px auto;
+      /* Centra la imagen horizontalmente y añade margen inferior */
+    }
+
+    /* Justificar el texto a la izquierda */
+    .cuadro-curveado p {
+      text-align: left;
+      /* Justifica el texto a la izquierda */
+      margin: 0 0 10px 0;
+      /* Añade margen inferior a los párrafos */
+    }
+
+
+    td:first-child,
+    th:first-child {
+      width: 5%;
+      font-weight: bold;
+    }
+
+    .minimalista {
+      width: 280px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-bottom: 3px solid #e0e0e0;
+      background: #f8f9fa;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .minimalista:focus {
+      border-bottom-color: #2196F3;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(33, 150, 243, 0.1);
+    }
+
+    #progressBarContainer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 0;
+      background-color: #f9f9f9;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      /* por encima del contenido */
+    }
+
+    .step {
+      width: 16px;
+      height: 16px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin: 0 2px;
+      background-color: white;
+      /* Pregunta no contestada */
+      transition: background-color 0.3s;
+    }
+
+    .passed {
+      background-color: #a2d5f2;
+      /* Azul claro para pasadas */
+    }
+
+    .current {
+      background-color: #007BFF;
+      /* Azul oscuro para la actual */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="progressBarContainer"></div>
+
+  <div class="container">
+    <h1>Prueba de Rendimiento - Final</h1>
+
+    <!-- PREGUNTA 1: FUMAR TABACO -->
+    <div class="pregunta activa" id="pregunta1">
+      <h2>CIENCIAS</h2>
+      <h3>FUMAR TABACO</h3>
+      <div class="cuadro-curveado">
+        El tabaco se fuma en forma de cigarrillos, puros o en pipa.
+        Ciertas investigaciones científicas han demostrado que las enfermedades relacionadas con el
+        tabaco matan cada día a unas 13.500 personas en el mundo. Se predice que, para 2030,
+        las enfermedades relacionadas con el tabaco originarán el 12 % del total de muertes.
+        <br>
+        <br>
+        El humo del tabaco contiene sustancias nocivas. Las sustancias más perjudiciales son el alquitrán,
+        la nicotina y el monóxido de carbono.
+      </div>
+
+      <p><strong>Pregunta 1</strong></p>
+      <p>
+        El humo del tabaco se inhala en los pulmones.
+        El alquitrán del humo se deposita en los pulmones y les impide funcionar de forma adecuada.
+      </p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Cuál de las siguientes funciones es propia del pulmón?
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Bombear sangre oxigenada a todas las partes del cuerpo.</td>
+          <td><input type="radio" name="p1" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Transferir el oxígeno del aire que respiras a la sangre.</td>
+          <td><input type="radio" name="p1" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Purificar la sangre reduciendo a cero su contenido en dióxido de carbono.</td>
+          <td><input type="radio" name="p1" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Transformar las moléculas de dióxido de carbono en moléculas de oxígeno.</td>
+          <td><input type="radio" name="p1" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="window.location.href='MenuPrincipal.html'">Menú</button>
+      <button onclick="mostrarPregunta(2)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 2: FUMAR TABACO -->
+    <div class="pregunta" id="pregunta2">
+      <h2>CIENCIAS</h2>
+      <h3>FUMAR TABACO</h3>
+      <div class="cuadro-curveado">
+        El tabaco se fuma en forma de cigarrillos, puros o en pipa.
+        Ciertas investigaciones científicas han demostrado que las enfermedades relacionadas con el
+        tabaco matan cada día a unas 13.500 personas en el mundo. Se predice que, para 2030,
+        las enfermedades relacionadas con el tabaco originarán el 12 % del total de muertes.
+        <br>
+        <br>
+        El humo del tabaco contiene sustancias nocivas. Las sustancias más perjudiciales son el alquitrán,
+        la nicotina y el monóxido de carbono.
+      </div>
+      <p><strong>Pregunta 2:</strong></p>
+      <p>Fumar tabaco aumenta el riesgo de padecer cáncer de pulmón y otras enfermedades.<br>
+        ¿Aumenta el riesgo de padecer las siguientes enfermedades por fumar tabaco?
+      </p>
+      <table>
+        <tr>
+          <th colspan="2" style="text-align: center;">¿Fumar aumenta el riesgo de padecer esta enfermedad?</th>
+          <th>Sí</th>
+          <th>No</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Bronquitis</td>
+          <td><input type="radio" name="p2_1" value="Si"></td>
+          <td><input type="radio" name="p2_1" value="No"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>VIH / SIDA</td>
+          <td><input type="radio" name="p2_2" value="Si"></td>
+          <td><input type="radio" name="p2_2" value="No"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Enfermedad cardiaca</td>
+          <td><input type="radio" name="p2_3" value="Si"></td>
+          <td><input type="radio" name="p2_3" value="No"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Varicela</td>
+          <td><input type="radio" name="p2_4" value="Si"></td>
+          <td><input type="radio" name="p2_4" value="No"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(1)">Anterior</button>
+      <button onclick="mostrarPregunta(3)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 3: FUMAR TABACO -->
+    <div class="pregunta" id="pregunta3">
+      <h2>CIENCIAS</h2>
+      <h3>FUMAR TABACO</h3>
+      <div class="cuadro-curveado">
+        El tabaco se fuma en forma de cigarrillos, puros o en pipa.
+        Ciertas investigaciones científicas han demostrado que las enfermedades relacionadas con el
+        tabaco matan cada día a unas 13.500 personas en el mundo. Se predice que, para 2030,
+        las enfermedades relacionadas con el tabaco originarán el 12 % del total de muertes.
+        <br>
+        <br>
+        El humo del tabaco contiene sustancias nocivas. Las sustancias más perjudiciales son el alquitrán,
+        la nicotina y el monóxido de carbono.
+      </div>
+      <p><strong>Pregunta 3</strong></p>
+      <p>Algunas personas usan parches de nicotina para dejar de fumar. Los parches se pegan a la piel y
+        liberan nicotina a la sangre. Esto ayuda a reducir la ansiedad y eliminar los síntomas de abstinencia
+        cuando la gente deja de fumar.<br><br>
+        Para estudiar la efectividad de los parches de nicotina, se escoge al azar a un grupo de 100 fumadores
+        que quieren dejar de fumar. Este grupo será sometido a estudio durante seis meses.
+        La efectividad de los parches de nicotina se determinará contando el número de personas
+        que no han conseguido dejar de fumar al final del estudio.<br>
+      </p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">Entre los siguientes, ¿cuál es el mejor diseño experimental?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Poner parches a todas las personas del grupo.</td>
+          <td><input type="radio" name="p3" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Poner parches a todo el grupo excepto a una persona que tratará de dejar de fumar sin parches.</td>
+          <td><input type="radio" name="p3" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Cada persona elige si quiere llevar parche o no para dejar de fumar.</td>
+          <td><input type="radio" name="p3" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Se escoge al azar a una mitad del grupo que llevará parches, y la otra mitad no los llevará.</td>
+          <td><input type="radio" name="p3" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(2)">Anterior</button>
+      <button onclick="mostrarPregunta(4)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 4: PROTECTORES SOLARES -->
+    <div class="pregunta" id="pregunta4">
+      <h2>CIENCIAS</h2>
+      <h3>PROTECTORES SOLARES</h3>
+      <div class="cuadro-curveado">
+        Milagros y Daniel quieren saber qué protector solar les proporciona la mejor protección para la piel.
+        Los protectores solares llevan un factor de protección solar (FPS) que indica hasta qué punto el
+        producto absorbe las radiaciones ultravioleta de la luz solar. Un protector solar con un FPS alto
+        protege la piel durante más tiempo que un protector solar con un FPS bajo.<br><br>
+
+        A Milagros se le ocurrió una forma de comparar diferentes protectores solares. Daniel y ella reunieron los
+        siguientes materiales:<br><br>
+        <ul>
+          <li>Dos hojas de un plástico transparente que no absorbe la luz solar;</li>
+          <li>Una hoja de papel sensible a la luz;</li>
+          <li>Aceite mineral (AM) y una crema con óxido de zinc (ZnO); y</li>
+          <li>Aceite mineral (AM) y una crema con óxido de zinc (ZnO); y</li>
+          <li>Cuatro protectores solares diferentes, a los que llamaron PS1, PS2, PS3, y PS4.</li>
+        </ul>
+        <p>Milagros y Daniel utilizaron aceite mineral porque deja pasar la mayor parte de la luz solar,
+          y el óxido de zinc porque bloquea casi completamente la luz del sol. <br><br>
+
+          Daniel puso una gota de cada sustancia dentro de unos círculos marcados en una de las láminas
+          de plástico y después colocó la otra lámina encima. Colocó luego sobre las láminas de plástico
+          un libro grande para presionarlas.
+        </p>
+      </div>
+
+      <div class="cuadro-curveado">
+        <img src="Multimedia/ProtectoresSolares.png" alt="Protectores solares">
+        <p> A continuación, Milagros puso las láminas de plástico encima de la hoja de papel sensible a la luz.
+          El papel sensible a la luz cambia de gris oscuro a blanco (o gris muy claro), en función del tiempo
+          que esté expuesto a la luz solar. Por último, Daniel puso las hojas en un lugar soleado.
+        </p>
+        <img src="Multimedia/ProtectoresSolares2.png" alt="Protectores solares">
+      </div>
+      <p><strong>Pregunta 4</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">De las afirmaciones siguientes, ¿cuál es una descripción
+            científica de la función que
+            cumplen el aceite mineral y el óxido de zinc al comparar la efectividad de los protectores solares?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>El aceite mineral y el óxido de zinc son los dos factores que se están estudiando.</td>
+          <td><input type="radio" name="p4" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>El aceite mineral es un factor que está siendo estudiado, y el óxido de zinc es una sustancia de
+            referencia.</td>
+          <td><input type="radio" name="p4" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>El aceite mineral es una sustancia de referencia y el óxido de zinc es el factor que se está estudiado.
+          </td>
+          <td><input type="radio" name="p4" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>El aceite mineral y el óxido de zinc son las dos sustancias de referencia.</td>
+          <td><input type="radio" name="p4" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(3)">Anterior</button>
+      <button onclick="mostrarPregunta(5)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 5 -->
+    <div class="pregunta" id="pregunta5">
+      <h2>CIENCIAS</h2>
+      <h3>PROTECTORES SOLARES</h3>
+      <div class="cuadro-curveado">
+        Milagros y Daniel quieren saber qué protector solar les proporciona la mejor protección para la piel.
+        Los protectores solares llevan un factor de protección solar (FPS) que indica hasta qué punto el
+        producto absorbe las radiaciones ultravioleta de la luz solar. Un protector solar con un FPS alto
+        protege la piel durante más tiempo que un protector solar con un FPS bajo.<br><br>
+
+        A Milagros se le ocurrió una forma de comparar diferentes protectores solares. Daniel y ella reunieron los
+        siguientes materiales:<br><br>
+        <ul>
+          <li>Dos hojas de un plástico transparente que no absorbe la luz solar;</li>
+          <li>Una hoja de papel sensible a la luz;</li>
+          <li>Aceite mineral (AM) y una crema con óxido de zinc (ZnO); y</li>
+          <li>Aceite mineral (AM) y una crema con óxido de zinc (ZnO); y</li>
+          <li>Cuatro protectores solares diferentes, a los que llamaron PS1, PS2, PS3, y PS4.</li>
+        </ul>
+        <p>Milagros y Daniel utilizaron aceite mineral porque deja pasar la mayor parte de la luz solar,
+          y el óxido de zinc porque bloquea casi completamente la luz del sol. <br><br>
+
+          Daniel puso una gota de cada sustancia dentro de unos círculos marcados en una de las láminas
+          de plástico y después colocó la otra lámina encima. Colocó luego sobre las láminas de plástico
+          un libro grande para presionarlas.
+        </p>
+      </div>
+
+      <div class="cuadro-curveado">
+        <img src="Multimedia/ProtectoresSolares.png" alt="Protectores solares">
+        <p> A continuación, Milagros puso las láminas de plástico encima de la hoja de papel sensible a la luz.
+          El papel sensible a la luz cambia de gris oscuro a blanco (o gris muy claro), en función del tiempo
+          que esté expuesto a la luz solar. Por último, Daniel puso las hojas en un lugar soleado.
+        </p>
+        <img src="Multimedia/ProtectoresSolares2.png" alt="Protectores solares">
+      </div>
+      <p><strong>Pregunta 5</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Cuál de las siguientes preguntas trataban de responder Milagros y
+            Daniel?</th>
+        <tr>
+          <td>A)</td>
+          <td>¿Qué protección proporciona cada protector solar en comparación con los otros?</td>
+          <td><input type="radio" name="p5" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>¿Cómo protegen la piel de la radiación ultravioleta los protectores solares?</td>
+          <td><input type="radio" name="p5" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>¿Hay algún protector solar que proteja menos que el aceite mineral?</td>
+          <td><input type="radio" name="p5" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>¿Hay algún protector solar que proteja más que el óxido de zinc?</td>
+          <td><input type="radio" name="p5" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(4)">Anterior</button>
+      <button onclick="mostrarPregunta(6)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 6 -->
+    <div class="pregunta" id="pregunta6">
+      <h2>CIENCIAS</h2>
+      <h3>PROTECTORES SOLARES</h3>
+      <div class="cuadro-curveado">
+        Milagros y Daniel quieren saber qué protector solar les proporciona la mejor protección para la piel.
+        Los protectores solares llevan un factor de protección solar (FPS) que indica hasta qué punto el
+        producto absorbe las radiaciones ultravioleta de la luz solar. Un protector solar con un FPS alto
+        protege la piel durante más tiempo que un protector solar con un FPS bajo.<br><br>
+
+        A Milagros se le ocurrió una forma de comparar diferentes protectores solares. Daniel y ella reunieron los
+        siguientes materiales:<br><br>
+        <ul>
+          <li>Dos hojas de un plástico transparente que no absorbe la luz solar;</li>
+          <li>Una hoja de papel sensible a la luz;</li>
+          <li>Aceite mineral (AM) y una crema con óxido de zinc (ZnO); y</li>
+          <li>Aceite mineral (AM) y una crema con óxido de zinc (ZnO); y</li>
+          <li>Cuatro protectores solares diferentes, a los que llamaron PS1, PS2, PS3, y PS4.</li>
+        </ul>
+        <p>Milagros y Daniel utilizaron aceite mineral porque deja pasar la mayor parte de la luz solar,
+          y el óxido de zinc porque bloquea casi completamente la luz del sol. <br><br>
+
+          Daniel puso una gota de cada sustancia dentro de unos círculos marcados en una de las láminas
+          de plástico y después colocó la otra lámina encima. Colocó luego sobre las láminas de plástico
+          un libro grande para presionarlas.
+        </p>
+      </div>
+
+      <div class="cuadro-curveado">
+        <img src="Multimedia/ProtectoresSolares.png" alt="Protectores solares">
+        <p> A continuación, Milagros puso las láminas de plástico encima de la hoja de papel sensible a la luz.
+          El papel sensible a la luz cambia de gris oscuro a blanco (o gris muy claro), en función del tiempo
+          que esté expuesto a la luz solar. Por último, Daniel puso las hojas en un lugar soleado.
+        </p>
+        <img src="Multimedia/ProtectoresSolares2.png" alt="Protectores solares">
+      </div>
+      <p><strong>Pregunta 6</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Por qué presionaron la segunda hoja de plástico?
+          </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Para impedir que las gotas se secaran.</td>
+          <td><input type="radio" name="p6" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Para extender las gotas lo más rápidamente posible.</td>
+          <td><input type="radio" name="p6" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Para mantener las gotas en los círculos.</td>
+          <td><input type="radio" name="p6" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Para que las gotas tuvieran el mismo grosor.</td>
+          <td><input type="radio" name="p6" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(5)">Anterior</button>
+      <button onclick="mostrarPregunta(7)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 7 -->
+    <div class="pregunta" id="pregunta7">
+      <h2>CIENCIAS</h2>
+      <h3>PROTECTORES SOLARES</h3>
+      <div class="cuadro-curveado">
+        Milagros y Daniel quieren saber qué protector solar les proporciona la mejor protección para la piel.
+        Los protectores solares llevan un factor de protección solar (FPS) que indica hasta qué punto el
+        producto absorbe las radiaciones ultravioleta de la luz solar. Un protector solar con un FPS alto
+        protege la piel durante más tiempo que un protector solar con un FPS bajo.<br><br>
+
+        A Milagros se le ocurrió una forma de comparar diferentes protectores solares. Daniel y ella reunieron los
+        siguientes materiales:<br><br>
+        <ul>
+          <li>Dos hojas de un plástico transparente que no absorbe la luz solar;</li>
+          <li>Una hoja de papel sensible a la luz;</li>
+          <li>Aceite mineral (AM) y una crema con óxido de zinc (ZnO); y</li>
+          <li>Aceite mineral (AM) y una crema con óxido de zinc (ZnO); y</li>
+          <li>Cuatro protectores solares diferentes, a los que llamaron PS1, PS2, PS3, y PS4.</li>
+        </ul>
+        <p>Milagros y Daniel utilizaron aceite mineral porque deja pasar la mayor parte de la luz solar,
+          y el óxido de zinc porque bloquea casi completamente la luz del sol. <br><br>
+
+          Daniel puso una gota de cada sustancia dentro de unos círculos marcados en una de las láminas
+          de plástico y después colocó la otra lámina encima. Colocó luego sobre las láminas de plástico
+          un libro grande para presionarlas.
+        </p>
+      </div>
+
+      <div class="cuadro-curveado">
+        <img src="Multimedia/ProtectoresSolares.png" alt="Protectores solares">
+        <p> A continuación, Milagros puso las láminas de plástico encima de la hoja de papel sensible a la luz.
+          El papel sensible a la luz cambia de gris oscuro a blanco (o gris muy claro), en función del tiempo
+          que esté expuesto a la luz solar. Por último, Daniel puso las hojas en un lugar soleado.
+        </p>
+        <img src="Multimedia/ProtectoresSolares2.png" alt="Protectores solares">
+      </div>
+      <p><strong>Pregunta 7</strong></p>
+      <p>El papel sensible a la luz es gris oscuro y cambia a gris claro cuando se expone a un poco de luz, y,
+        a blanco cuando se expone a mucha luz ¿Cuál de estas figuras representa un resultado que podría ocurrir?
+        Marca con un círculo la opción elegida y explica tu elección.</p>
+      <img src="Multimedia/ProtectoresSolares3.png" alt="Protectores solares">
+      <textarea rows="4" placeholder="Tu explicación aquí..."></textarea>
+      <button onclick="mostrarPregunta(6)">Anterior</button>
+      <button onclick="mostrarPregunta(8)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 8: EL GRAN CAÑÓN -->
+    <div class="pregunta" id="pregunta8">
+      <h2>CIENCIAS</h2>
+      <h3>EL GRAN CAÑÓN</h3>
+      <div class="cuadro-curveado">
+        El Gran Cañón está situado en un desierto de los Estados Unidos.
+        Es un cañón muy largo y profundo que contiene muchas capas de rocas.
+        En algún momento del pasado, los movimientos de la tierra levantaron estas capas.
+        Hoy en día el Gran Cañón tiene 1,6 km de profundidad en algunas zonas.
+        El río Colorado fluye por el fondo del cañón.<br><br>
+
+        Mira la siguiente foto del Gran Cañón, tomada desde su orilla sur.
+        En las paredes del cañón se pueden ver las diferentes capas de rocas.
+        <img src="Multimedia/Canon.png" alt="Gran Cañón">
+      </div>
+      <p><strong>Pregunta 8</strong>
+      </p>
+      <p>Cada año unos cinco millones de personas visitan el parque nacional del Gran Cañón.
+        Existe preocupación por el deterioro que está sufriendo el parque debido al elevado número de visitantes.</p>
+      <table>
+        <tr>
+          <th colspan="2" style="text-align: center;">¿Es posible responder las preguntas siguientes mediante
+            investigación científica?</th>
+          <th>Sí</th>
+          <th>No</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>¿Qué cantidad de desgaste del terreno se produce por la utilización de las pistas forestales?</td>
+          <td><input type="radio" name="p8_1" value="Si"></td>
+          <td><input type="radio" name="p8_1" value="No"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>¿El parque es tan bello como lo era hace 100 años?</td>
+          <td><input type="radio" name="p8_2" value="Si"></td>
+          <td><input type="radio" name="p8_2" value="No"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(7)">Anterior</button>
+      <button onclick="mostrarPregunta(9)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 9: EL GRAN CAÑÓN -->
+    <div class="pregunta" id="pregunta9">
+      <h2>CIENCIAS</h2>
+      <h3>EL GRAN CAÑÓN</h3>
+      <div class="cuadro-curveado">
+        El Gran Cañón está situado en un desierto de los Estados Unidos.
+        Es un cañón muy largo y profundo que contiene muchas capas de rocas.
+        En algún momento del pasado, los movimientos de la tierra levantaron estas capas.
+        Hoy en día el Gran Cañón tiene 1,6 km de profundidad en algunas zonas.
+        El río Colorado fluye por el fondo del cañón.<br><br>
+
+        Mira la siguiente foto del Gran Cañón, tomada desde su orilla sur.
+        En las paredes del cañón se pueden ver las diferentes capas de rocas.
+        <img src="Multimedia/Canon.png" alt="Gran Cañón">
+      </div>
+      <p><strong>Pregunta 9:</strong></p>
+      <p>La temperatura en el Gran Cañón varía de menos de 0ºC a más de 40ºC.
+        Aunque la zona es desértica, las hendiduras, aberturas o huecos de las rocas a veces contienen agua.
+        ¿De qué manera estos cambios de temperatura y la presencia de agua en las hendiduras de las rocas contribuyen
+        a acelerar el desmenuzamiento de las rocas?</p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿De qué manera los cambios de temperatura y la presencia de agua
+            contribuyen al
+            desmenuzamiento de las rocas?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>El agua congelada disuelve las rocas calientes.</td>
+          <td><input type="radio" name="p9" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>“El agua pega las rocas entre sí” o “El agua une las rocas”.</td>
+          <td><input type="radio" name="p9" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>El hielo pule la superficie de las rocas.</td>
+          <td><input type="radio" name="p9" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>El agua congelada se dilata en las hendiduras de las rocas.</td>
+          <td><input type="radio" name="p9" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(8)">Anterior</button>
+      <button onclick="mostrarPregunta(10)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 10 -->
+    <div class="pregunta" id="pregunta10">
+      <h2>CIENCIAS</h2>
+      <h3>EL GRAN CAÑÓN</h3>
+      <div class="cuadro-curveado">
+        El Gran Cañón está situado en un desierto de los Estados Unidos.
+        Es un cañón muy largo y profundo que contiene muchas capas de rocas.
+        En algún momento del pasado, los movimientos de la tierra levantaron estas capas.
+        Hoy en día el Gran Cañón tiene 1,6 km de profundidad en algunas zonas.
+        El río Colorado fluye por el fondo del cañón.<br><br>
+
+        Mira la siguiente foto del Gran Cañón, tomada desde su orilla sur.
+        En las paredes del cañón se pueden ver las diferentes capas de rocas.
+        <img src="Multimedia/Canon.png" alt="Gran Cañón">
+      </div>
+      <p><strong>Pregunta 10:</strong></p>
+      <p>En la capa de caliza A del Gran Cañón se encuentran muchos fósiles de animales marinos,
+        como almejas, peces y corales.</p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Qué sucedió hace millones de años para que aparezcan estos
+            fósiles en esta capa?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Antiguamente los habitantes transportaban alimentos marinos desde el océano a esta área.</td>
+          <td><input type="radio" name="p10" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>En otro tiempo, los océanos eran más violentos, y olas gigantes arrastraban criaturas marinas hacia el
+            interior.</td>
+          <td><input type="radio" name="p10" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>En esa época, la zona estaba cubierta por un océano que más tarde se retiró.</td>
+          <td><input type="radio" name="p10" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Algunos animales marinos vivieron una vez sobre la tierra antes de emigrar al mar.</td>
+          <td><input type="radio" name="p10" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(9)">Anterior</button>
+      <button onclick="mostrarPregunta(11)">Siguiente</button>
+    </div>
+
+    <!-- ======================
+       MATEMÁTICAS
+       ====================== -->
+
+    <!-- PREGUNTA 11: APARATOS ELECTRÓNICOS DAÑADOS -->
+    <div class="pregunta" id="pregunta11">
+      <h2>MATEMÁTICAS</h2>
+      <h3>Aparatos Electrónicos Dañados</h3>
+      <p>La empresa Electrix fabrica dos tipos de aparatos electrónicos: teléfonos móviles y tabletas.
+        Los aparatos se prueban al finalizar la producción diaria y los que están dañados se retiran
+        y se envían a reparar. <br>
+        La siguiente tabla muestra el número medio de aparatos de cada tipo que se fabrican al día y
+        el porcentaje promedio de aparatos dañados al día.
+      </p>
+      <img src="Multimedia/Matematica1.png" alt="Electrix">
+      <p><strong>Pregunta 11:</strong></p>
+      <p>A continuación, figuran tres afirmaciones sobre la producción diaria en la empresa Electrix </p>
+      <table>
+        <tr>
+          <th colspan="2" style="text-align: center;">¿Es correcta la afirmación?</th>
+          <th>Sí</th>
+          <th>No</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Un tercio de los aparatos fabricados diariamente son teléfonos móviles</td>
+          <td><input type="radio" name="p11_1" value="Si"></td>
+          <td><input type="radio" name="p11_1" value="No"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>En cada lote de 100 teléfonos móviles fabricados habrá, exactamente, 5 dañados</td>
+          <td><input type="radio" name="p11_2" value="Si"></td>
+          <td><input type="radio" name="p11_2" value="No"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Si de la producción diaria se elige una tableta al azar para probarla,
+            la probabilidad de que tenga que ser reparada es de 0.03</td>
+          <td><input type="radio" name="p11_3" value="Si"></td>
+          <td><input type="radio" name="p11_3" value="No"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(10)">Anterior</button>
+      <button onclick="mostrarPregunta(12)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 12 -->
+    <div class="pregunta" id="pregunta12">
+      <h2>MATEMÁTICAS</h2>
+      <h3>Aparatos Electrónicos Dañados</h3>
+      <p>La empresa Electrix fabrica dos tipos de aparatos electrónicos: teléfonos móviles y tabletas.
+        Los aparatos se prueban al finalizar la producción diaria y los que están dañados se retiran
+        y se envían a reparar. <br>
+        La siguiente tabla muestra el número medio de aparatos de cada tipo que se fabrican al día y
+        el porcentaje promedio de aparatos dañados al día.
+      </p>
+      <img src="Multimedia/Matematica1.png" alt="Electrix">
+      <p><strong>Pregunta 12:</strong></p>
+      <p>Una de las personas que realiza las pruebas hace la siguiente afirmación:<br><br>
+
+        «Como promedio, se envían a reparar más teléfonos móviles al día que tabletas» <br><br>
+        Indica si la afirmación de la persona que realiza las pruebas es o no correcta. Justifica matemáticamente tu
+        respuesta.
+      </p>
+      <textarea rows="4" placeholder="Explicación aquí..."></textarea>
+      <button onclick="mostrarPregunta(11)">Anterior</button>
+      <button onclick="mostrarPregunta(13)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 13 -->
+    <div class="pregunta" id="pregunta13">
+      <h2>MATEMÁTICAS</h2>
+      <h3>Aparatos Electrónicos Dañados</h3>
+      <p>La empresa Electrix fabrica dos tipos de aparatos electrónicos: teléfonos móviles y tabletas.
+        Los aparatos se prueban al finalizar la producción diaria y los que están dañados se retiran
+        y se envían a reparar. <br>
+        La siguiente tabla muestra el número medio de aparatos de cada tipo que se fabrican al día y
+        el porcentaje promedio de aparatos dañados al día.
+      </p>
+      <img src="Multimedia/Matematica1.png" alt="Electrix">
+      <p><strong>Pregunta 13:</strong></p>
+      <p>La empresa Tronics también fabrica teléfonos móviles y tabletas.
+        Los aparatos de la empresa Tronics se prueban al finalizar los ciclos de producción
+        diaria y los que están dañados se retiran y se envían a reparar.<br><br>
+        Las siguientes tablas comparan el número promedio de aparatos de cada tipo que se fabrican
+        al día y el porcentaje promedio de aparatos dañados al día correspondientes a las dos empresas.
+      </p>
+      <img src="Multimedia/Matematica2.png" alt="Tronics">
+      <p>¿Cuál de las dos empresas, Electrix o Tronics, presenta el porcentaje total más bajo de aparatos
+        dañados? Explica tu respuesta utilizando los datos de las tablas anteriores.</p>
+      <textarea rows="4" placeholder="Tu explicación aquí..."></textarea>
+      <button onclick="mostrarPregunta(12)">Anterior</button>
+      <button onclick="mostrarPregunta(14)">Siguiente</button>
+    </div>
+
+    <!-- Sección: ELENA, LA CICLISTA -->
+    <!-- PREGUNTA 14 -->
+    <div class="pregunta" id="pregunta14">
+      <h2>MATEMÁTICAS</h2>
+      <h3>ELENA, LA CICLISTA</h3>
+      <p>Elena acaba de comprar una nueva bicicleta con un medidor de velocidad situado en el manillar.
+        El medidor de velocidad le indica a Elena la distancia que recorre y la velocidad promedio del trayecto.</p>
+      <img src="Multimedia/ElenaCiclista.png" alt="Elena">
+      <p><strong>Pregunta 14:</strong></p>
+      <p>Durante un trayecto, Elena hizo 4 km durante los 10 primeros minutos y luego 2 km durante los 5 minutos
+        siguientes.</p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Cuál de las siguientes afirmaciones es la correcta?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>A. La velocidad promedio de Elena fue mayor durante los 10 primeros minutos que durante los 5 minutos
+            siguientes.</td>
+          <td><input type="radio" name="p14" value="A"></td>
+        <tr>
+        <tr>
+          <td>B)</td>
+          <td>La velocidad promedio de Elena fue la misma durante los 10 primeros minutos que durante los 5 minutos
+            siguientes.</td>
+          <td><input type="radio" name="p14" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>La velocidad promedio de Elena fue menor durante los 10 primeros minutos que durante los 5 minutos
+            siguientes.</td>
+          <td><input type="radio" name="p14" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>No se puede decir nada sobre la velocidad promedio de Elena a partir de la información facilitada.</td>
+          <td><input type="radio" name="p14" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(13)">Anterior</button>
+      <button onclick="mostrarPregunta(15)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 15 -->
+    <div class="pregunta" id="pregunta15">
+      <h2>MATEMÁTICAS</h2>
+      <h3>ELENA, LA CICLISTA</h3>
+      <p>Elena acaba de comprar una nueva bicicleta con un medidor de velocidad situado en el manillar.
+        El medidor de velocidad le indica a Elena la distancia que recorre y la velocidad promedio del trayecto.</p>
+      <img src="Multimedia/ElenaCiclista.png" alt="Elena">
+      <p><strong>Pregunta 15:</strong></p>
+      <P>Elena recorrió 6 km hasta la casa de su tía. El medidor de velocidad marcó una velocidad promedio de 18 km/h
+        para todo el trayecto.</P>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Cuál de las siguientes afirmaciones es la correcta?</th>
+        <tr>
+        <tr>
+          <td>A)</td>
+          <td>A Elena le llevó 20 minutos llegar a casa de su tía.</td>
+          <td><input type="radio" name="p15" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>A Elena le llevó 30 minutos llegar a casa de su tía.</td>
+          <td><input type="radio" name="p15" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>A Elena le llevó 3 horas llegar a casa de su tía.</td>
+          <td><input type="radio" name="p15" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>No se puede decir cuánto tiempo le llevó a Elena llegar a casa de su tía.</td>
+          <td><input type="radio" name="p15" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(14)">Anterior</button>
+      <button onclick="mostrarPregunta(16)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 16 -->
+    <div class="pregunta" id="pregunta16">
+      <h2>MATEMÁTICAS</h2>
+      <h3>ELENA, LA CICLISTA</h3>
+      <p>Elena acaba de comprar una nueva bicicleta con un medidor de velocidad situado en el manillar.
+        El medidor de velocidad le indica a Elena la distancia que recorre y la velocidad promedio del trayecto.</p>
+      <img src="Multimedia/ElenaCiclista.png" alt="Elena">
+      <p><strong>Pregunta 16:</strong></p>
+      <p>Elena fue en bicicleta desde su casa hasta la escuela, que está a 4 km. Le llevó 9 minutos.
+        Volvió a casa por una ruta más corta de 3 km, que solo le llevó 6 minutos.</p>
+      <p>¿Cuál fue la velocidad promedio de Elena, en km/h, en su trayecto de ida y vuelta a la escuela?</p>
+      <input type="number" placeholder="Respuesta (km/h)" class="minimalista" name="p16">
+      <br><br>
+      <br><br>
+      <button onclick="mostrarPregunta(15)">Anterior</button>
+      <button onclick="mostrarPregunta(17)">Siguiente</button>
+    </div>
+
+    <!-- Sección: BARCOS DE VELA -->
+    <!-- PREGUNTA 17 -->
+    <div class="pregunta" id="pregunta17">
+      <h2>MATEMÁTICAS</h2>
+      <h3>BARCOS DE VELA</h3>
+      <div class="cuadro-curveado">
+        El noventa y cinco por ciento del comercio mundial se realiza por mar gracias a unos 50.000 buques cisterna,
+        graneleros y buques portacontenedores. La mayoría de estos barcos utilizan diesel. Los ingenieros pretenden
+        utilizar la energía eólica para sustentar los barcos. Su propuesta consiste en enganchar unas velas especiales
+        (velas-cometa) a los barcos y utilizar el poder del viento para reducir el consumo de diesel y el impacto del
+        combustible sobre el medio ambiente.
+      </div>
+      <p><strong>Pregunta 17:</strong></p>
+      <p>Una ventaja de utilizar una vela-cometa es que esta vuela a una altura de 150 m. Allí, la velocidad del viento
+        es,
+        aproximadamente, un 25% mayor que sobre la cubierta del barco.</p>
+
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">
+            ¿A qué velocidad, aproximadamente, sopla el viento en una vela-cometa cuando sobre
+            la cubierta de un buque portacontenedor la velocidad del viento es de 24 km/h?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>6 km/h</td>
+          <td><input type="radio" name="p17" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>18 km/h</td>
+          <td><input type="radio" name="p17" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>25 km/h</td>
+          <td><input type="radio" name="p17" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>30 km/h</td>
+          <td><input type="radio" name="p17" value="D"></td>
+        </tr>
+        <tr>
+          <td>E)</td>
+          <td>49 km/h</td>
+          <td><input type="radio" name="p17" value="E"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(16)">Anterior</button>
+      <button onclick="mostrarPregunta(18)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 18 -->
+    <div class="pregunta" id="pregunta18">
+      <h2>MATEMÁTICAS</h2>
+      <h3>BARCOS DE VELA</h3>
+      <div class="cuadro-curveado">
+        El noventa y cinco por ciento del comercio mundial se realiza por mar gracias a unos 50.000 buques cisterna,
+        graneleros y buques portacontenedores. La mayoría de estos barcos utilizan diesel. Los ingenieros pretenden
+        utilizar la energía eólica para sustentar los barcos. Su propuesta consiste en enganchar unas velas especiales
+        (velas-cometa) a los barcos y utilizar el poder del viento para reducir el consumo de diesel y el impacto del
+        combustible sobre el medio ambiente.
+      </div>
+      <p><strong>Pregunta 18:</strong></p>
+      <img src="Multimedia/Matematica3.png" alt="Vela-cometa">
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">Aproximadamente, ¿qué longitud debe tener la cuerda de la
+            vela-cometa para tirar del barco en un ángulo
+            de 45° y estar a una altura vertical de 150 m, tal y como se muestra en el dibujo?</th>
+        <tr>
+        <tr>
+          <td>A)</td>
+          <td>173 m</td>
+          <td><input type="radio" name="p18" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>212 m</td>
+          <td><input type="radio" name="p18" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>285 m</td>
+          <td><input type="radio" name="p18" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>300 m</td>
+          <td><input type="radio" name="p18" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(17)">Anterior</button>
+      <button onclick="mostrarPregunta(19)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 19 -->
+    <div class="pregunta" id="pregunta19">
+      <h2>MATEMÁTICAS</h2>
+      <h3>BARCOS DE VELA</h3>
+      <div class="cuadro-curveado">
+        El noventa y cinco por ciento del comercio mundial se realiza por mar gracias a unos 50.000 buques cisterna,
+        graneleros y buques portacontenedores. La mayoría de estos barcos utilizan diesel. Los ingenieros pretenden
+        utilizar la energía eólica para sustentar los barcos. Su propuesta consiste en enganchar unas velas especiales
+        (velas-cometa) a los barcos y utilizar el poder del viento para reducir el consumo de diesel y el impacto del
+        combustible sobre el medio ambiente.
+      </div>
+      <p><strong>Pregunta 19:</strong></p>
+      <p>Debido al elevado precio del diesel, de 0,42 dólares por litro, los propietarios del barco NewWave están
+        pensando en equiparlo con una vela-cometa.<br><br>
+        Se calcula que una vela-cometa como esta puede reducir el consumo total de diesel en torno a un 20%.
+      </p>
+      <div class="cuadro-curveado">
+        <p>Nombre: NewWave<br><br>
+          Tipo: Buque de carga<br><br>
+          Eslora: 117 metros<br><br>
+          Manga: 18 metros<br><br>
+          Capacidad de carga: 12.000 toneladas<br><br>
+          Velocidad máxima: 19 nudos<br><br>
+          Consumo de diesel al año sin una vela-cometa: Aproximadamente 3.500.000 litros
+        </p>
+        <img src="Multimedia/Matematica4.png" alt="Vela-cometa">
+      </div>
+      <p>El coste de equipar al NewWave con una vela-cometa es de 2.500.000 dólares.<br><br>
+        ¿Tras cuántos años, aproximadamente, el ahorro de diesel cubrirá el coste de la vela-cometa?<br><br>
+        Explica tu respuesta a continuación:
+      </p>
+      <textarea rows="4" placeholder="Tu respuesta aquí..."></textarea>
+      <button onclick="mostrarPregunta(18)">Anterior</button>
+      <button onclick="mostrarPregunta(20)">Siguiente</button>
+    </div>
+
+    <!-- =====================
+       LECTURA
+       ===================== -->
+
+    <!-- PREGUNTA 20: LAS BIBLIOTECAS -->
+    <div class="pregunta" id="pregunta20">
+      <h2>LECTURA</h2>
+      <h3>LAS BIBLIOTECAS MUNICIPALES</h3>
+      <div class="cuadro-curveado">
+        El sistema de Bibliotecas Municipales regala a sus nuevos socios un marcador de páginas en el que se muestra
+        su horario de apertura y cierre. Utilízalo para responder a las siguientes preguntas.<br><br>
+        <img src="Multimedia/Lectura.png" alt="Bibliotecas">
+      </div>
+
+      <p><strong>Pregunta 20:</strong></p>
+      <p><strong>¿A qué hora cierra la biblioteca Lope de Vega los miércoles?</strong></p>
+      <input type="time" placeholder="Respuesta..." name="p20" value="00:00">
+      <br>
+      <button onclick="mostrarPregunta(19)">Anterior</button>
+      <button onclick="mostrarPregunta(21)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 21 -->
+    <div class="pregunta" id="pregunta21">
+      <h2>LECTURA</h2>
+      <h3>LAS BIBLIOTECAS MUNICIPALES</h3>
+      <div class="cuadro-curveado">
+        El sistema de Bibliotecas Municipales regala a sus nuevos socios un marcador de páginas en el que se muestra
+        su horario de apertura y cierre. Utilízalo para responder a las siguientes preguntas.<br><br>
+        <img src="Multimedia/Lectura.png" alt="Bibliotecas">
+      </div>
+      <p><strong>Pregunta 21:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Qué biblioteca continúa abierta a las 6:00 PM horas las tardes de
+            los viernes?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Biblioteca Cervantes</td>
+          <td><input type="radio" name="p21" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Biblioteca Quevedo</td>
+          <td><input type="radio" name="p21" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Biblioteca Góngora</td>
+          <td><input type="radio" name="p21" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Biblioteca Lope de Vega</td>
+          <td><input type="radio" name="p21" value="D"></td>
+        </tr>
+        <tr>
+          <td>E)</td>
+          <td>Biblioteca Calderón</td>
+          <td><input type="radio" name="p21" value="E"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(20)">Anterior</button>
+      <button onclick="mostrarPregunta(22)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 22: GRAFFITI -->
+    <div class="pregunta" id="pregunta22">
+      <h2>LECTURA</h2>
+      <h3>GRAFFITI</h3>
+      <div class="cuadro-curveado">
+        <p style="font-style: italic">
+          "Estoy indignada porque es la cuarta vez que han tenido que limpiar y volver a pintar la pared del colegio para
+          quitar las pintadas. La creatividad es admirable, pero la gente debería encontrar otras formas de expresarse
+          que no supongan gastos extra para la sociedad.<br>
+          ¿Por qué nos creáis esa mala reputación a los jóvenes pintando en lugares en los que está prohibido? Los
+          artistas profesionales no cuelgan sus cuadros en las calles, ¿verdad? Lo que hacen es buscar quien les
+          financie y hacerse famosos a través de exposiciones que sí son legales.<br>
+          En mi opinión, edificios, vallas y bancos de los parques son obras de arte en sí mismos. Es realmente patético
+          estropear su arquitectura con graffiti y lo que es más, el método que se utiliza para ello destruye la capa de
+          ozono. Realmente no puedo entender por qué estos artistas delincuentes se enfadan cuando les quitan sus "obras
+          de arte" de las paredes una y otra vez."
+        </p>
+        <p style="text-align: right;"><strong>Olga</strong></p><br><br>
+
+        <p style="font-style: italic">
+          "Hay gustos para todo. Nuestra sociedad está invadida por la comunicación y la publicidad. Logotipos de
+          empresas, nombres de tiendas. Gran número de carteles ilegales pegados por las calles.<br>
+          ¿Es esto aceptable? Sí, en general, sí. ¿Son aceptables las pintadas? Algunos dirán que sí y otros que no.
+          ¿Quién paga el precio de las pintadas? ¿Quién paga al final la publicidad? Exacto. El consumidor.
+          ¿Acaso los que instalan las vallas publicitarias te han pedido permiso? No. ¿Y los que pintan los graffiti sí
+          tendrían que hacerlo? ¿No es todo una cuestión de comunicación, tu propio nombre, el nombre de las pandillas
+          callejeras y las vallas publicitarias de las calles?<br>
+          Piensa en la ropa de rayas y cuadros que apareció hace algunos años en las tiendas y en la ropa de esquí. El
+          estampado y los colores los habían copiado directamente de las floridas pintadas que llenaban los muros de
+          cemento. Es bastante chocante que aceptemos y admiremos estos estampados y colores y que, en cambio, ese mismo
+          estilo en graffiti nos parezca horroroso.<br>
+          Corren tiempos difíciles para el arte."
+        </p>
+        <p style="text-align: right;"><strong>Sofía</strong></p><br><br>
+      </div>
+      <p>Los dos mensajes anteriores llegaron por Internet y tratan de las pintadas o graffiti. Las pintadas o graffiti
+        son la
+        escritura o los dibujos no autorizados en las paredes o en cualquier otro sitio.<br><br>
+        Responde a las preguntas tomando como base los mensajes.</p>
+
+      <p><strong>Pregunta 22:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">El propósito de estos mensajes es...</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Explicar lo que son las pintadas o graffiti.</td>
+          <td><input type="radio" name="p22" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Presentar una opinión sobre las pintadas o graffiti.</td>
+          <td><input type="radio" name="p22" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Demostrar la popularidad de las pintadas o graffiti.</td>
+          <td><input type="radio" name="p22" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Decirle a la gente cuánto cuesta borrar las pintadas o graffiti.</td>
+          <td><input type="radio" name="p22" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(21)">Anterior</button>
+      <button onclick="mostrarPregunta(23)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 23 -->
+    <div class="pregunta" id="pregunta23">
+      <h2>LECTURA</h2>
+      <h3>GRAFFITI</h3>
+      <div class="cuadro-curveado">
+        <p style="font-style: italic">
+          "Estoy indignada porque es la cuarta vez que han tenido que limpiar y volver a pintar la pared del colegio para
+          quitar las pintadas. La creatividad es admirable, pero la gente debería encontrar otras formas de expresarse
+          que no supongan gastos extra para la sociedad.<br>
+          ¿Por qué nos creáis esa mala reputación a los jóvenes pintando en lugares en los que está prohibido? Los
+          artistas profesionales no cuelgan sus cuadros en las calles, ¿verdad? Lo que hacen es buscar quien les
+          financie y hacerse famosos a través de exposiciones que sí son legales.<br>
+          En mi opinión, edificios, vallas y bancos de los parques son obras de arte en sí mismos. Es realmente patético
+          estropear su arquitectura con graffiti y lo que es más, el método que se utiliza para ello destruye la capa de
+          ozono. Realmente no puedo entender por qué estos artistas delincuentes se enfadan cuando les quitan sus "obras
+          de arte" de las paredes una y otra vez."
+        </p>
+        <p style="text-align: right;"><strong>Olga</strong></p><br><br>
+
+        <p style="font-style: italic">
+          "Hay gustos para todo. Nuestra sociedad está invadida por la comunicación y la publicidad. Logotipos de
+          empresas, nombres de tiendas. Gran número de carteles ilegales pegados por las calles.<br>
+          ¿Es esto aceptable? Sí, en general, sí. ¿Son aceptables las pintadas? Algunos dirán que sí y otros que no.
+          ¿Quién paga el precio de las pintadas? ¿Quién paga al final la publicidad? Exacto. El consumidor.
+          ¿Acaso los que instalan las vallas publicitarias te han pedido permiso? No. ¿Y los que pintan los graffiti sí
+          tendrían que hacerlo? ¿No es todo una cuestión de comunicación, tu propio nombre, el nombre de las pandillas
+          callejeras y las vallas publicitarias de las calles?<br>
+          Piensa en la ropa de rayas y cuadros que apareció hace algunos años en las tiendas y en la ropa de esquí. El
+          estampado y los colores los habían copiado directamente de las floridas pintadas que llenaban los muros de
+          cemento. Es bastante chocante que aceptemos y admiremos estos estampados y colores y que, en cambio, ese mismo
+          estilo en graffiti nos parezca horroroso.<br>
+          Corren tiempos difíciles para el arte."
+        </p>
+        <p style="text-align: right;"><strong>Sofía</strong></p><br><br>
+      </div>
+      <p>Los dos mensajes anteriores llegaron por Internet y tratan de las pintadas o graffiti. Las pintadas o graffiti
+        son la
+        escritura o los dibujos no autorizados en las paredes o en cualquier otro sitio.<br><br>
+        Responde a las preguntas tomando como base los mensajes.</p>
+
+      <p><strong>Pregunta 23:</strong></p>
+      <p><strong>¿Por qué hace referencia Sofía a la publicidad?</strong></p>
+
+      <textarea rows="4" placeholder="Tu respuesta aquí..."></textarea>
+      <br>
+      <button onclick="mostrarPregunta(22)">Anterior</button>
+      <button onclick="mostrarPregunta(24)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 24 -->
+    <div class="pregunta" id="pregunta24">
+      <h2>LECTURA</h2>
+      <h3>GRAFFITI</h3>
+      <div class="cuadro-curveado">
+        <p style="font-style: italic">
+          "Estoy indignada porque es la cuarta vez que han tenido que limpiar y volver a pintar la pared del colegio para
+          quitar las pintadas. La creatividad es admirable, pero la gente debería encontrar otras formas de expresarse
+          que no supongan gastos extra para la sociedad.<br>
+          ¿Por qué nos creáis esa mala reputación a los jóvenes pintando en lugares en los que está prohibido? Los
+          artistas profesionales no cuelgan sus cuadros en las calles, ¿verdad? Lo que hacen es buscar quien les
+          financie y hacerse famosos a través de exposiciones que sí son legales.<br>
+          En mi opinión, edificios, vallas y bancos de los parques son obras de arte en sí mismos. Es realmente patético
+          estropear su arquitectura con graffiti y lo que es más, el método que se utiliza para ello destruye la capa de
+          ozono. Realmente no puedo entender por qué estos artistas delincuentes se enfadan cuando les quitan sus "obras
+          de arte" de las paredes una y otra vez."
+        </p>
+        <p style="text-align: right;"><strong>Olga</strong></p><br><br>
+
+        <p style="font-style: italic">
+          "Hay gustos para todo. Nuestra sociedad está invadida por la comunicación y la publicidad. Logotipos de
+          empresas, nombres de tiendas. Gran número de carteles ilegales pegados por las calles.<br>
+          ¿Es esto aceptable? Sí, en general, sí. ¿Son aceptables las pintadas? Algunos dirán que sí y otros que no.
+          ¿Quién paga el precio de las pintadas? ¿Quién paga al final la publicidad? Exacto. El consumidor.
+          ¿Acaso los que instalan las vallas publicitarias te han pedido permiso? No. ¿Y los que pintan los graffiti sí
+          tendrían que hacerlo? ¿No es todo una cuestión de comunicación, tu propio nombre, el nombre de las pandillas
+          callejeras y las vallas publicitarias de las calles?<br>
+          Piensa en la ropa de rayas y cuadros que apareció hace algunos años en las tiendas y en la ropa de esquí. El
+          estampado y los colores los habían copiado directamente de las floridas pintadas que llenaban los muros de
+          cemento. Es bastante chocante que aceptemos y admiremos estos estampados y colores y que, en cambio, ese mismo
+          estilo en graffiti nos parezca horroroso.<br>
+          Corren tiempos difíciles para el arte."
+        </p>
+        <p style="text-align: right;"><strong>Sofía</strong></p><br><br>
+      </div>
+      <p>Los dos mensajes anteriores llegaron por Internet y tratan de las pintadas o graffiti. Las pintadas o graffiti
+        son la
+        escritura o los dibujos no autorizados en las paredes o en cualquier otro sitio.<br><br>
+        Responde a las preguntas tomando como base los mensajes.</p>
+      <p><strong>Pregunta 24:</strong>
+      <p><strong>¿Con cuál de las autoras de los mensajes estás de acuerdo? Explica tu respuesta utilizando tus propias
+          palabras para referirte
+          a lo que se dice en uno o en ambos mensajes.</strong></p>
+      </p>
+      <textarea rows="4" placeholder="Tu explicación aquí..."></textarea>
+      <br>
+      <button onclick="mostrarPregunta(23)">Anterior</button>
+      <button onclick="mostrarPregunta(25)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 25: OPINIONES DE ESTUDIANTES -->
+    <div class="pregunta" id="pregunta25">
+      <h2>LECTURA</h2>
+      <h3>OPINIONES DE LOS ESTUDIANTES</h3>
+      <div class="cuadro-curveado">
+        <p style="font-style: italic">"Hay mucha gente en el mundo muriéndose de hambre y enfermedades, mientras nosotros nos preocupamos más de
+          los avances futuros. Dejamos atrás a esa gente intentando olvidarlos y seguir adelante.
+          Las grandes compañías gastan millones de dólares cada año en la investigación espacial.
+          Si el dinero gastado en la exploración del espacio se empleara en beneficio del necesitado
+          y no del codicioso, se podría aliviar el sufrimiento de millones de personas."</p>
+        <p style="text-align: right;"><strong>Ana</strong></p><br>
+        <p style="font-style: italic">
+          "El desafío de explorar el espacio es fuente de inspiración para mucha gente. Durante miles de años hemos
+          estado soñando con el universo, queriendo alargar la mano y tocar las estrellas, deseando comunicarnos
+          con algo que sólo imaginamos que existe, anhelando saber… ¿Estamos solos? La exploración del espacio es una
+          metáfora del conocimiento y el conocimiento es lo que mueve nuestro mundo. Mientras que los realistas siguen
+          recordándonos nuestros problemas actuales, los soñadores amplían nuestras mentes. Son las visiones, esperanzas
+          y deseos de los soñadores los que nos conducirán al futuro."
+        </p>
+        <p style="text-align: right;"><strong>Beatriz</strong></p><br>
+
+        <p style="font-style: italic">
+          "Nos cargamos las selvas tropicales porque hay petróleo en el subsuelo, excavamos minas en terreno sagrado
+          para
+          obtener uranio. ¿Destruiríamos también otro planeta sólo por conseguir la solución a problemas creados por
+          nosotros
+          mismos? ¡Por supuesto! La exploración del espacio confirma la poderosa creencia de que los problemas del
+          hombre
+          pueden
+          solucionarse mediante nuestra siempre creciente dominación del medio ambiente. Los seres humanos seguirán
+          creyendo que tienen derecho a abusar de los recursos naturales como los ríos y las selvas tropicales, si saben
+          que siempre queda otro planeta a la vuelta de la esquina esperando ser explotado.
+          Hemos hecho suficiente daño a la tierra. Deberíamos dejar tranquilo el espacio exterior."
+        </p>
+        <p style="text-align: right;"><strong>Diego</strong></p><br>
+
+        <p style="font-style: italic">
+          "Los recursos de la tierra están desapareciendo a gran velocidad. La población de la tierra está creciendo a
+          un
+          ritmo desenfrenado. La vida no puede mantenerse si continuamos viviendo de este modo. La contaminación ha
+          producido
+          un agujero en la capa de ozono. Las tierras fértiles se están agotando y pronto nuestros recursos alimentarios
+          se reducirán.
+          Ya hay casos de hambre y enfermedades causados por la superpoblación. El espacio es una enorme región vacía
+          que
+          podemos usar
+          en nuestro beneficio. Apoyando la exploración del espacio, podremos encontrar un día un planeta donde vivir.
+          De
+          momento,
+          esto parece impensable, pero la idea de viajar por el espacio parecía imposible en el pasado. Interrumpir la
+          exploración del
+          espacio para resolver problemas inmediatos muestra una gran estrechez mental y una visión a corto plazo.
+          Debemos
+          aprender a
+          pensar no sólo en esta generación sino en las generaciones futuras."
+        </p>
+        <p style="text-align: right;"><strong>Félix</strong></p><br><br>
+        <p style="font-style: italic">
+          "Ignorar lo que la exploración del espacio tiene que ofrecer sería una gran pérdida para la humanidad. Las
+          posibilidades de alcanzar una mayor comprensión del universo y sus orígenes son demasiado valiosas para
+          desaprovecharlas. El estudio de los cuerpos celestes ya ha aumentado nuestra comprensión de los problemas
+          medioambientales y del posible futuro de la Tierra si no aprendemos a gestionar nuestras actividades.<br><br>
+          También hay beneficios indirectos de la investigación para los viajes espaciales. La creación de la tecnología
+          láser y otros tratamientos médicos puede atribuirse a la investigación espacial. Substancias como el teflón
+          han
+          sido descubiertas gracias al interés de la humanidad por los viajes espaciales. Por lo tanto, las nuevas
+          tecnologías creadas para la investigación espacial pueden tener beneficios inmediatos para todo el mundo."
+        </p>
+        <p style="text-align: right;"><strong>Teresa</strong></p>
+      </div>
+
+      <p><strong>Pregunta 25:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Cuál de las siguientes preguntas se relaciona más directamente
+            con la lectura?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>¿Cuál es el problema más importante al que se enfrenta el mundo hoy?</td>
+          <td><input type="radio" name="p25" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>¿Estás a favor de la exploración del espacio?</td>
+          <td><input type="radio" name="p25" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>¿Crees en la vida más allá de nuestro planeta?</td>
+          <td><input type="radio" name="p25" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>¿Qué avances recientes ha habido en la investigación espacial?</td>
+          <td><input type="radio" name="p25" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(24)">Anterior</button>
+      <button onclick="mostrarPregunta(26)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 26 -->
+    <div class="pregunta" id="pregunta26">
+      <h2>LECTURA</h2>
+      <h3>OPINIONES DE LOS ESTUDIANTES</h3>
+      <div class="cuadro-curveado">
+        <p style="font-style: italic">"Hay mucha gente en el mundo muriéndose de hambre y enfermedades, mientras nosotros nos preocupamos más de
+          los avances futuros. Dejamos atrás a esa gente intentando olvidarlos y seguir adelante.
+          Las grandes compañías gastan millones de dólares cada año en la investigación espacial.
+          Si el dinero gastado en la exploración del espacio se empleara en beneficio del necesitado
+          y no del codicioso, se podría aliviar el sufrimiento de millones de personas."</p>
+        <p style="text-align: right;"><strong>Ana</strong></p><br>
+        <p style="font-style: italic">
+          "El desafío de explorar el espacio es fuente de inspiración para mucha gente. Durante miles de años hemos
+          estado soñando con el universo, queriendo alargar la mano y tocar las estrellas, deseando comunicarnos
+          con algo que sólo imaginamos que existe, anhelando saber… ¿Estamos solos? La exploración del espacio es una
+          metáfora del conocimiento y el conocimiento es lo que mueve nuestro mundo. Mientras que los realistas siguen
+          recordándonos nuestros problemas actuales, los soñadores amplían nuestras mentes. Son las visiones, esperanzas
+          y deseos de los soñadores los que nos conducirán al futuro."
+        </p>
+        <p style="text-align: right;"><strong>Beatriz</strong></p><br>
+
+        <p style="font-style: italic">
+          "Nos cargamos las selvas tropicales porque hay petróleo en el subsuelo, excavamos minas en terreno sagrado
+          para
+          obtener uranio. ¿Destruiríamos también otro planeta sólo por conseguir la solución a problemas creados por
+          nosotros
+          mismos? ¡Por supuesto! La exploración del espacio confirma la poderosa creencia de que los problemas del
+          hombre
+          pueden
+          solucionarse mediante nuestra siempre creciente dominación del medio ambiente. Los seres humanos seguirán
+          creyendo que tienen derecho a abusar de los recursos naturales como los ríos y las selvas tropicales, si saben
+          que siempre queda otro planeta a la vuelta de la esquina esperando ser explotado.
+          Hemos hecho suficiente daño a la tierra. Deberíamos dejar tranquilo el espacio exterior."
+        </p>
+        <p style="text-align: right;"><strong>Diego</strong></p><br>
+
+        <p style="font-style: italic">
+          "Los recursos de la tierra están desapareciendo a gran velocidad. La población de la tierra está creciendo a
+          un
+          ritmo desenfrenado. La vida no puede mantenerse si continuamos viviendo de este modo. La contaminación ha
+          producido
+          un agujero en la capa de ozono. Las tierras fértiles se están agotando y pronto nuestros recursos alimentarios
+          se reducirán.
+          Ya hay casos de hambre y enfermedades causados por la superpoblación. El espacio es una enorme región vacía
+          que
+          podemos usar
+          en nuestro beneficio. Apoyando la exploración del espacio, podremos encontrar un día un planeta donde vivir.
+          De
+          momento,
+          esto parece impensable, pero la idea de viajar por el espacio parecía imposible en el pasado. Interrumpir la
+          exploración del
+          espacio para resolver problemas inmediatos muestra una gran estrechez mental y una visión a corto plazo.
+          Debemos
+          aprender a
+          pensar no sólo en esta generación sino en las generaciones futuras."
+        </p>
+        <p style="text-align: right;"><strong>Félix</strong></p><br><br>
+        <p style="font-style: italic">
+          "Ignorar lo que la exploración del espacio tiene que ofrecer sería una gran pérdida para la humanidad. Las
+          posibilidades de alcanzar una mayor comprensión del universo y sus orígenes son demasiado valiosas para
+          desaprovecharlas. El estudio de los cuerpos celestes ya ha aumentado nuestra comprensión de los problemas
+          medioambientales y del posible futuro de la Tierra si no aprendemos a gestionar nuestras actividades.<br><br>
+          También hay beneficios indirectos de la investigación para los viajes espaciales. La creación de la tecnología
+          láser y otros tratamientos médicos puede atribuirse a la investigación espacial. Substancias como el teflón
+          han
+          sido descubiertas gracias al interés de la humanidad por los viajes espaciales. Por lo tanto, las nuevas
+          tecnologías creadas para la investigación espacial pueden tener beneficios inmediatos para todo el mundo."
+        </p style="font-style: italic">
+        <p style="text-align: right;"><strong>Teresa</strong></p>
+      </div>
+      <p><strong>Pregunta 26:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">¿Cuál de los autores contradice más directamente la exposición de
+            Félix?
+          </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Diego</td>
+          <td><input type="radio" name="p26" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Ana</td>
+          <td><input type="radio" name="p26" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Teresa</td>
+          <td><input type="radio" name="p26" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Beatriz</td>
+          <td><input type="radio" name="p26" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(25)">Anterior</button>
+      <button onclick="mostrarPregunta(27)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 27 -->
+    <div class="pregunta" id="pregunta27">
+      <h2>LECTURA</h2>
+      <h3>OPINIONES DE LOS ESTUDIANTES</h3>
+      <div class="cuadro-curveado">
+        <p style="font-style: italic">"Hay mucha gente en el mundo muriéndose de hambre y enfermedades, mientras nosotros nos preocupamos más de
+          los avances futuros. Dejamos atrás a esa gente intentando olvidarlos y seguir adelante.
+          Las grandes compañías gastan millones de dólares cada año en la investigación espacial.
+          Si el dinero gastado en la exploración del espacio se empleara en beneficio del necesitado
+          y no del codicioso, se podría aliviar el sufrimiento de millones de personas."</p>
+        <p style="text-align: right;"><strong>Ana</strong></p><br>
+        <p style="font-style: italic">
+          "El desafío de explorar el espacio es fuente de inspiración para mucha gente. Durante miles de años hemos
+          estado soñando con el universo, queriendo alargar la mano y tocar las estrellas, deseando comunicarnos
+          con algo que sólo imaginamos que existe, anhelando saber… ¿Estamos solos? La exploración del espacio es una
+          metáfora del conocimiento y el conocimiento es lo que mueve nuestro mundo. Mientras que los realistas siguen
+          recordándonos nuestros problemas actuales, los soñadores amplían nuestras mentes. Son las visiones, esperanzas
+          y deseos de los soñadores los que nos conducirán al futuro."
+        </p>
+        <p style="text-align: right;"><strong>Beatriz</strong></p><br>
+
+        <p style="font-style: italic">
+          "Nos cargamos las selvas tropicales porque hay petróleo en el subsuelo, excavamos minas en terreno sagrado
+          para
+          obtener uranio. ¿Destruiríamos también otro planeta sólo por conseguir la solución a problemas creados por
+          nosotros
+          mismos? ¡Por supuesto! La exploración del espacio confirma la poderosa creencia de que los problemas del
+          hombre
+          pueden
+          solucionarse mediante nuestra siempre creciente dominación del medio ambiente. Los seres humanos seguirán
+          creyendo que tienen derecho a abusar de los recursos naturales como los ríos y las selvas tropicales, si saben
+          que siempre queda otro planeta a la vuelta de la esquina esperando ser explotado.
+          Hemos hecho suficiente daño a la tierra. Deberíamos dejar tranquilo el espacio exterior."
+        </p>
+        <p style="text-align: right;"><strong>Diego</strong></p><br>
+
+        <p style="font-style: italic">
+          "Los recursos de la tierra están desapareciendo a gran velocidad. La población de la tierra está creciendo a
+          un
+          ritmo desenfrenado. La vida no puede mantenerse si continuamos viviendo de este modo. La contaminación ha
+          producido
+          un agujero en la capa de ozono. Las tierras fértiles se están agotando y pronto nuestros recursos alimentarios
+          se reducirán.
+          Ya hay casos de hambre y enfermedades causados por la superpoblación. El espacio es una enorme región vacía
+          que
+          podemos usar
+          en nuestro beneficio. Apoyando la exploración del espacio, podremos encontrar un día un planeta donde vivir.
+          De
+          momento,
+          esto parece impensable, pero la idea de viajar por el espacio parecía imposible en el pasado. Interrumpir la
+          exploración del
+          espacio para resolver problemas inmediatos muestra una gran estrechez mental y una visión a corto plazo.
+          Debemos
+          aprender a
+          pensar no sólo en esta generación sino en las generaciones futuras."
+        </p>
+        <p style="text-align: right;"><strong>Félix</strong></p><br><br>
+        <p style="font-style: italic">
+          "Ignorar lo que la exploración del espacio tiene que ofrecer sería una gran pérdida para la humanidad. Las
+          posibilidades de alcanzar una mayor comprensión del universo y sus orígenes son demasiado valiosas para
+          desaprovecharlas. El estudio de los cuerpos celestes ya ha aumentado nuestra comprensión de los problemas
+          medioambientales y del posible futuro de la Tierra si no aprendemos a gestionar nuestras actividades.<br><br>
+          También hay beneficios indirectos de la investigación para los viajes espaciales. La creación de la tecnología
+          láser y otros tratamientos médicos puede atribuirse a la investigación espacial. Substancias como el teflón
+          han
+          sido descubiertas gracias al interés de la humanidad por los viajes espaciales. Por lo tanto, las nuevas
+          tecnologías creadas para la investigación espacial pueden tener beneficios inmediatos para todo el mundo."
+        </p>
+        <p style="text-align: right;"><strong>Teresa</strong></p>
+      </div>
+      <p><strong>Pregunta 27:</strong></p>
+      <p><strong>Pensando en las principales ideas expuestas por los cinco estudiantes, ¿con cuál de los estudiantes
+          estás de acuerdo?</strong></p>
+      <P>Nombre del estudiante
+        <select name="estudiante">
+          <option value="" disabled selected>--Seleccione--</option>
+          <option value="ana">Ana</option>
+          <option value="beatriz">Beatriz</option>
+          <option value="diego">Diego</option>
+          <option value="felix">Félix</option>
+          <option value="teresa">Teresa</option>
+        </select>
+      </P>
+      <br>
+      <p><strong>Utilizando tus propias palabras, explica las razones de tu elección haciendo referencia a tu propia
+          opinión y a las principales ideas expuestas por el estudiante.</strong></p>
+      <textarea rows="4" placeholder="Tus razones aquí..."></textarea>
+      <br>
+      <button onclick="mostrarPregunta(26)">Anterior</button>
+      <button onclick="mostrarPregunta(28)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 28 -->
+    <div class="pregunta" id="pregunta28">
+      <h2>LECTURA</h2>
+      <h3>OPINIONES DE LOS ESTUDIANTES</h3>
+      <div class="cuadro-curveado">
+        <p style="font-style: italic">"Hay mucha gente en el mundo muriéndose de hambre y enfermedades, mientras nosotros nos preocupamos más de
+          los avances futuros. Dejamos atrás a esa gente intentando olvidarlos y seguir adelante.
+          Las grandes compañías gastan millones de dólares cada año en la investigación espacial.
+          Si el dinero gastado en la exploración del espacio se empleara en beneficio del necesitado
+          y no del codicioso, se podría aliviar el sufrimiento de millones de personas."</p>
+        <p style="text-align: right;"><strong>Ana</strong></p><br>
+        <p style="font-style: italic">
+          "El desafío de explorar el espacio es fuente de inspiración para mucha gente. Durante miles de años hemos
+          estado soñando con el universo, queriendo alargar la mano y tocar las estrellas, deseando comunicarnos
+          con algo que sólo imaginamos que existe, anhelando saber… ¿Estamos solos? La exploración del espacio es una
+          metáfora del conocimiento y el conocimiento es lo que mueve nuestro mundo. Mientras que los realistas siguen
+          recordándonos nuestros problemas actuales, los soñadores amplían nuestras mentes. Son las visiones, esperanzas
+          y deseos de los soñadores los que nos conducirán al futuro."
+        </p>
+        <p style="text-align: right;"><strong>Beatriz</strong></p><br>
+
+        <p style="font-style: italic">
+          "Nos cargamos las selvas tropicales porque hay petróleo en el subsuelo, excavamos minas en terreno sagrado
+          para
+          obtener uranio. ¿Destruiríamos también otro planeta sólo por conseguir la solución a problemas creados por
+          nosotros
+          mismos? ¡Por supuesto! La exploración del espacio confirma la poderosa creencia de que los problemas del
+          hombre
+          pueden
+          solucionarse mediante nuestra siempre creciente dominación del medio ambiente. Los seres humanos seguirán
+          creyendo que tienen derecho a abusar de los recursos naturales como los ríos y las selvas tropicales, si saben
+          que siempre queda otro planeta a la vuelta de la esquina esperando ser explotado.
+          Hemos hecho suficiente daño a la tierra. Deberíamos dejar tranquilo el espacio exterior."
+        </p>
+        <p style="text-align: right;"><strong>Diego</strong></p><br>
+
+        <p style="font-style: italic">
+          "Los recursos de la tierra están desapareciendo a gran velocidad. La población de la tierra está creciendo a
+          un
+          ritmo desenfrenado. La vida no puede mantenerse si continuamos viviendo de este modo. La contaminación ha
+          producido
+          un agujero en la capa de ozono. Las tierras fértiles se están agotando y pronto nuestros recursos alimentarios
+          se reducirán.
+          Ya hay casos de hambre y enfermedades causados por la superpoblación. El espacio es una enorme región vacía
+          que
+          podemos usar
+          en nuestro beneficio. Apoyando la exploración del espacio, podremos encontrar un día un planeta donde vivir.
+          De
+          momento,
+          esto parece impensable, pero la idea de viajar por el espacio parecía imposible en el pasado. Interrumpir la
+          exploración del
+          espacio para resolver problemas inmediatos muestra una gran estrechez mental y una visión a corto plazo.
+          Debemos
+          aprender a
+          pensar no sólo en esta generación sino en las generaciones futuras."
+        </p>
+        <p style="text-align: right;"><strong>Félix</strong></p><br><br>
+        <p style="font-style: italic">
+          "Ignorar lo que la exploración del espacio tiene que ofrecer sería una gran pérdida para la humanidad. Las
+          posibilidades de alcanzar una mayor comprensión del universo y sus orígenes son demasiado valiosas para
+          desaprovecharlas. El estudio de los cuerpos celestes ya ha aumentado nuestra comprensión de los problemas
+          medioambientales y del posible futuro de la Tierra si no aprendemos a gestionar nuestras actividades.<br><br>
+          También hay beneficios indirectos de la investigación para los viajes espaciales. La creación de la tecnología
+          láser y otros tratamientos médicos puede atribuirse a la investigación espacial. Substancias como el teflón
+          han
+          sido descubiertas gracias al interés de la humanidad por los viajes espaciales. Por lo tanto, las nuevas
+          tecnologías creadas para la investigación espacial pueden tener beneficios inmediatos para todo el mundo."
+        </p>
+        <p style="text-align: right;"><strong>Teresa</strong></p>
+      </div>
+      <p><strong>Pregunta 28:</strong></p>
+      <p>Algunas afirmaciones son cuestiones de opinión, basadas en las ideas y valores del autor. Otras afirmaciones
+        son cuestiones de hecho, que pueden ser probadas objetivamente y bien son correctas o incorrectas. <br><br>
+        Selecciona “cuestión de opinión” o cuestión de hecho” junto a cada una de las citas de las redacciones
+        de los estudiantes que aparecen a continuación.<br><br>
+        La primera está hecha a modo de ejemplo.
+      </p>
+      <table>
+        <tr>
+          <th colspan="2" style="text-align: center;">Citas de las redacciones de los estudiantes</th>
+          <th>Cuestión de opinión</th>
+          <th>Cuestión de hecho</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>"La contaminación ha producido un agujero en la capa de ozono" (Félix) <span
+              style="color: rgba(255, 0, 0, 0.74);"> - Ejemplo</span></td>
+          <td><input type="radio" name="p28_1" value="" disabled></td>
+          <td><input type="radio" name="p28_1" value="" checked disabled></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>“Las grandes compañías gastan billones de pesetas cada año en la investigación espacial” (Ana)</td>
+          <td><input type="radio" name="p28_2" value="opinion"></td>
+          <td><input type="radio" name="p28_2" value="hecho"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>“La exploración del espacio refuerza la peligrosa creencia de que los problemas humanos pueden resolverse
+            mediante nuestro siempre creciente dominio del entorno natural” (Diego)</td>
+          <td><input type="radio" name="p28_3" value="opinion"></td>
+          <td><input type="radio" name="p28_3" value="hecho"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>“Interrumpir la exploración del espacio para resolver problemas inmediatos muestra una gran estrechez
+            mental
+            y una visión a corto plazo” (Félix)</td>
+          <td><input type="radio" name="p28_4" value="opinion"></td>
+          <td><input type="radio" name="p28_4" value="hecho"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(27)">Anterior</button>
+      <button onclick="mostrarPregunta(29)">Siguiente</button>
+    </div>
+
+    <!-- =====================
+       INGLÉS
+       ===================== -->
+    <!-- PREGUNTA 29 -->
+    <div class="pregunta" id="pregunta29">
+      <h2>INGLÉS</h2>
+      <h3>READING A1-A2 - Shopping for clothes</h3>
+      <p>Lee las siguientes preguntas y selecciona la respuesta correcta en cada caso.<br>
+        Read the following questions and choose the correct answer in each case.</p>
+      <p><strong>Pregunta 29:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">I have breakfast here every day before i go to school:</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Museum</td>
+          <td><input type="radio" name="p29" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Swimming pool</td>
+          <td><input type="radio" name="p29" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Cinema</td>
+          <td><input type="radio" name="p29" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>School</td>
+          <td><input type="radio" name="p29" value="D"></td>
+        </tr>
+        <tr>
+          <td>E)</td>
+          <td>Shop</td>
+          <td><input type="radio" name="p29" value="E"></td>
+        </tr>
+        <tr>
+          <td>F)</td>
+          <td>Café</td>
+          <td><input type="radio" name="p29" value="F"></td>
+        </tr>
+        <tr>
+          <td>G)</td>
+          <td>Park</td>
+          <td><input type="radio" name="p29" value="G"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(28)">Anterior</button>
+      <button onclick="mostrarPregunta(30)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 30 -->
+    <div class="pregunta" id="pregunta30">
+      <h2>INGLÉS</h2>
+      <h3>READING A1-A2</h3>
+      <p><strong>Pregunta 30:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">I want to go swimming, but first i need to buy some new shorts:
+          </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Museum</td>
+          <td><input type="radio" name="p30" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Swimming pool</td>
+          <td><input type="radio" name="p30" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Cinema</td>
+          <td><input type="radio" name="p30" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>School</td>
+          <td><input type="radio" name="p30" value="D"></td>
+        </tr>
+        <tr>
+          <td>E)</td>
+          <td>Shop</td>
+          <td><input type="radio" name="p30" value="E"></td>
+        </tr>
+        <tr>
+          <td>F)</td>
+          <td>Café</td>
+          <td><input type="radio" name="p30" value="F"></td>
+        </tr>
+        <tr>
+          <td>G)</td>
+          <td>Park</td>
+          <td><input type="radio" name="p30" value="G"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(29)">Anterior</button>
+      <button onclick="mostrarPregunta(31)">Siguiente</button>
+    </div>
+    <!-- ============================= -->
+    <!-- PREGUNTA 31 -->
+    <div class="pregunta" id="pregunta31">
+      <h2>INGLÉS</h2>
+      <h3>READING A1-A2 - Shopping for clothes</h3>
+      <p><strong>Pregunta 31:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">People usually sit here and look at the beautiful flowers and
+            trees:</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Museum</td>
+          <td><input type="radio" name="p31" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Swimming pool</td>
+          <td><input type="radio" name="p31" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Cinema</td>
+          <td><input type="radio" name="p31" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>School</td>
+          <td><input type="radio" name="p31" value="D"></td>
+        </tr>
+        <tr>
+          <td>E)</td>
+          <td>Shop</td>
+          <td><input type="radio" name="p31" value="E"></td>
+        </tr>
+        <tr>
+          <td>F)</td>
+          <td>Café</td>
+          <td><input type="radio" name="p31" value="F"></td>
+        </tr>
+        <tr>
+          <td>G)</td>
+          <td>Park</td>
+          <td><input type="radio" name="p31" value="G"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(30)">Anterior</button>
+      <button onclick="mostrarPregunta(32)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 32 -->
+    <div class="pregunta" id="pregunta32">
+      <h2>INGLÉS</h2>
+      <h3>READING A1-A2 - Shopping for clothes</h3>
+      <p><strong>Pregunta 32:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">There are a lot of interesting old things to look at:</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Museum</td>
+          <td><input type="radio" name="p32" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Swimming pool</td>
+          <td><input type="radio" name="p32" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Cinema</td>
+          <td><input type="radio" name="p32" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>School</td>
+          <td><input type="radio" name="p32" value="D"></td>
+        </tr>
+        <tr>
+          <td>E)</td>
+          <td>Shop</td>
+          <td><input type="radio" name="p32" value="E"></td>
+        </tr>
+        <tr>
+          <td>F)</td>
+          <td>Café</td>
+          <td><input type="radio" name="p32" value="F"></td>
+        </tr>
+        <tr>
+          <td>G)</td>
+          <td>Park</td>
+          <td><input type="radio" name="p32" value="G"></td>
+        </tr>
+      </table>
+      </table>
+      <button onclick="mostrarPregunta(31)">Anterior</button>
+      <button onclick="mostrarPregunta(33)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 33 -->
+    <div class="pregunta" id="pregunta33">
+      <h2>INGLÉS</h2>
+      <h3>READING A1-A2 - Shopping for clothes</h3>
+      <p><strong>Pregunta 33:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">We usually go there on saturday night to watch something:</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Museum</td>
+          <td><input type="radio" name="p33" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Swimming pool</td>
+          <td><input type="radio" name="p33" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Cinema</td>
+          <td><input type="radio" name="p33" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>School</td>
+          <td><input type="radio" name="p33" value="D"></td>
+        </tr>
+        <tr>
+          <td>E)</td>
+          <td>Shop</td>
+          <td><input type="radio" name="p33" value="E"></td>
+        </tr>
+        <tr>
+          <td>F)</td>
+          <td>Café</td>
+          <td><input type="radio" name="p33" value="F"></td>
+        </tr>
+        <tr>
+          <td>G)</td>
+          <td>Park</td>
+          <td><input type="radio" name="p33" value="G"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(32)">Anterior</button>
+      <button onclick="mostrarPregunta(34)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 34 -->
+    <div class="pregunta" id="pregunta34">
+      <h2>INGLÉS</h2>
+      <h3>READING A1-A2 - Shopping for clothes</h3>
+      <p><strong>Pregunta 34:</strong></p>
+      <div class="cuadro-curveado">
+        <img src="Multimedia/Ingles1.png" alt="Notes">
+      </div>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">What does Emma want to know?</th>
+        <tr>
+          <td>A)</td>
+          <td>Emma has forgotten when the next science class is.</td>
+          <td><input type="radio" name="p34" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Emma hopes Sara will help her find her science notes.</td>
+          <td><input type="radio" name="p34" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Emma wants to know what the science homework is.</td>
+          <td><input type="radio" name="p34" value="C"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(33)">Anterior</button>
+      <button onclick="mostrarPregunta(35)">Siguiente</button>
+    </div>
+
+    <!-- =========================
+       LISTENING - Shopping for clothes (35-43)
+       ========================= -->
+
+    <!-- PREGUNTA 35 -->
+    <div class="pregunta" id="pregunta35">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 35:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">What does the customer want to buy?
+          </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>T-Shirt</td>
+          <td><input type="radio" name="p35" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Jacket</td>
+          <td><input type="radio" name="p35" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Jeans</td>
+          <td><input type="radio" name="p35" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Cardigan</td>
+          <td><input type="radio" name="p35" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(34)">Anterior</button>
+      <button onclick="mostrarPregunta(36)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 36 -->
+    <div class="pregunta" id="pregunta36">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 36:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">What color and size of jacket does the customer first try on?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Medium size in blue</td>
+          <td><input type="radio" name="p36" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Large size in black</td>
+          <td><input type="radio" name="p36" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Small size in red</td>
+          <td><input type="radio" name="p36" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Medium size in grey</td>
+          <td><input type="radio" name="p36" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(35)">Anterior</button>
+      <button onclick="mostrarPregunta(37)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 37 -->
+    <div class="pregunta" id="pregunta37">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 37:</strong></p>
+      <table>
+        <tr>
+          <Th colspan="3" style="text-align: center;">What size of jacket does she finally choose?</Th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>X-Small</td>
+          <td><input type="radio" name="p37" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Small</td>
+          <td><input type="radio" name="p37" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Medium</td>
+          <td><input type="radio" name="p37" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Large</td>
+          <td><input type="radio" name="p37" value="D"></td>
+        </tr>
+        <tr>
+          <td>E)</td>
+          <td>X-Large</td>
+          <td><input type="radio" name="p37" value="E"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(36)">Anterior</button>
+      <button onclick="mostrarPregunta(38)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 38 -->
+    <div class="pregunta" id="pregunta38">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 38:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">What color is the jacket that the customer finally decides to buy?
+          </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Blue</td>
+          <td><input type="radio" name="p38" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Black</td>
+          <td><input type="radio" name="p38" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Grey</td>
+          <td><input type="radio" name="p38" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Red</td>
+          <td><input type="radio" name="p38" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(37)">Anterior</button>
+      <button onclick="mostrarPregunta(39)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 39 -->
+    <div class="pregunta" id="pregunta39">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 39:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">How much does it cost?</th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>49</td>
+          <td><input type="radio" name="p39" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>4.95</td>
+          <td><input type="radio" name="p39" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>49.99</td>
+          <td><input type="radio" name="p39" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>9.99</td>
+          <td><input type="radio" name="p39" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(38)">Anterior</button>
+      <button onclick="mostrarPregunta(40)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 40 -->
+    <div class="pregunta" id="pregunta40">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 40:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">What discount is offered if the customer buys a second piece of
+            clothing? </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>15%</td>
+          <td><input type="radio" name="p40" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>10%</td>
+          <td><input type="radio" name="p40" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>20%</td>
+          <td><input type="radio" name="p40" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>25%</td>
+          <td><input type="radio" name="p40" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(39)">Anterior</button>
+      <button onclick="mostrarPregunta(41)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 41 -->
+    <div class="pregunta" id="pregunta41">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 41:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">Which cardigan colors does the customer try on? </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Brown and black</td>
+          <td><input type="radio" name="p41" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Gray and blue</td>
+          <td><input type="radio" name="p41" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Black and grey</td>
+          <td><input type="radio" name="p41" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Blue and Brown</td>
+          <td><input type="radio" name="p41" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(40)">Anterior</button>
+      <button onclick="mostrarPregunta(42)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 42 -->
+    <div class="pregunta" id="pregunta42">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 42:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">What color of cardigan does the customer finally choose to buy? </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>Black</td>
+          <td><input type="radio" name="p42" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>Brown</td>
+          <td><input type="radio" name="p42" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>Blue</td>
+          <td><input type="radio" name="p42" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>Grey</td>
+          <td><input type="radio" name="p42" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(41)">Anterior</button>
+      <button onclick="mostrarPregunta(43)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 43 -->
+    <div class="pregunta" id="pregunta43">
+      <h2>INGLÉS</h2>
+      <h3>LISTENING - Shopping for clothes</h3>
+      <div class="cuadro-curveado">
+        <video width="640" height="360" controls>
+          <source src="Multimedia/Shopping for clothes – A2 English Listening Test.mp4" type="video/mp4">
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+      <p><strong>Pregunta 43:</strong></p>
+      <table>
+        <tr>
+          <th colspan="3" style="text-align: center;">How much does she pay for the jacket and the cardigan? </th>
+        </tr>
+        <tr>
+          <td>A)</td>
+          <td>89.99</td>
+          <td><input type="radio" name="p43" value="A"></td>
+        </tr>
+        <tr>
+          <td>B)</td>
+          <td>76</td>
+          <td><input type="radio" name="p43" value="B"></td>
+        </tr>
+        <tr>
+          <td>C)</td>
+          <td>24</td>
+          <td><input type="radio" name="p43" value="C"></td>
+        </tr>
+        <tr>
+          <td>D)</td>
+          <td>10</td>
+          <td><input type="radio" name="p43" value="D"></td>
+        </tr>
+      </table>
+      <button onclick="mostrarPregunta(42)">Anterior</button>
+      <button onclick="mostrarPregunta(44)">Siguiente</button>
+    </div>
+
+    <!-- =========================
+       SPEAKING - Thanksgiving Day
+       Preguntas 44 y 45
+       ========================= -->
+
+    <!-- PREGUNTA 44 -->
+    <div class="pregunta" id="pregunta44">
+      <h2>INGLÉS</h2>
+      <h3>SPEAKING - Thanksgiving Day</h3>
+      <div class="cuadro-curveado">
+      <p>You will have to talk about a picture. First, you have 10 seconds to look at the picture. You will be asked 2
+        questions. You have 30 seconds for each question.<br><br>
+        Please record yourself while speaking (you can use a smartphone).
+      </p>
+      <img src="Multimedia/Ingles2.png" alt="Thanksgiving Day">
+      </div>
+      
+      <p><strong>Pregunta 44:</strong></p>
+
+      <p><strong>Question 1: What is happening in the picture?</strong></p>
+      <textarea rows="4" placeholder="..."></textarea>
+
+      <button onclick="mostrarPregunta(43)">Anterior</button>
+      <button onclick="mostrarPregunta(45)">Siguiente</button>
+    </div>
+
+    <!-- PREGUNTA 45 -->
+    <div class="pregunta" id="pregunta45">
+      <h2>INGLÉS</h2>
+      <h3>SPEAKING - Thanksgiving Day</h3>
+      <div class="cuadro-curveado">
+      <p>You will have to talk about a picture. First, you have 10 seconds to look at the picture. You will be asked 2
+        questions. You have 30 seconds for each question.<br><br>
+        Please record yourself while speaking (you can use a smartphone).
+      </p>
+      <img src="Multimedia/Ingles2.png" alt="Thanksgiving Day">
+      </div>
+
+      <p><strong>Pregunta 45:</strong></p>
+      <p><strong>Question 2: Why do you think the people are smiling?</strong></p>
+      <textarea rows="4" placeholder="..."></textarea>
+      <button onclick="mostrarPregunta(44)">Anterior</button>
+      <button onclick="mostrarPregunta()">Finalizar</button>
+    </div>
+
+  </div>
+  <footer>
+    &copy; 2025 Todos los derechos de autor y propiedad intelectual son respetados. <br>
+    Contenido descargado de la plataforma Proyecto Descartes <br>
+    <a href="#" target="_blank">Política de privacidad</a> |
+    <a href="#" target="_blank">Términos de uso</a>
+  </footer>
+
+  <script src="./ScriptPruebaFinal.js"> </script>
+
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultados - Prueba de Rendimiento</title>
+  <style>
+    /********************************************************
+     1) ESTILOS DE FONDO
+    ********************************************************/
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(45deg, #dae7f5, #ebf2fa);
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /********************************************************
+     2) CONTAINER TRANSLÚCIDO
+    ********************************************************/
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .container h2 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    /********************************************************
+     3) SECCIÓN DE RESULTADOS
+    ********************************************************/
+    .pantalla-resultado {
+      display: block; /* Ensure it is visible */
+    }
+
+    .mensaje-calificacion {
+      font-size: 1.1em;
+      line-height: 1.4;
+      color: #34495e;
+      margin-bottom: 20px;
+      white-space: pre-line;
+    }
+
+    /********************************************************
+     4) BARRA DE PROGRESO
+    ********************************************************/
+    .barra-progreso {
+      width: 300px;
+      height: 20px;
+      background-color: #eee;
+      margin: 0 auto 20px auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .barra-progreso-interna {
+      height: 100%;
+      width: 0%;
+      background-color: #27ae60;
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    /********************************************************
+     5) BOTONES
+    ********************************************************/
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 10px 5px 0 5px; /* Para separarlos un poco */
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    /********************************************************
+     6) LOGO ENCABEZADO
+    ********************************************************/
+    .logo-encabezado {
+      width: 150px; /* ajusta a tu gusto */
+      height: auto;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body onload="initResultados()">
+
+<!-- Contenedor principal -->
+<div class="container pantalla-resultado" id="pantallaResultado">
+
+  <!-- Logo en la parte superior -->
+  <img src="Multimedia/SECUNDARIA_AVANZA_LOGO_TRANSPARENT.png" 
+       alt="Logo Secundaria Avanza"
+       class="logo-encabezado" />
+
+<!-- Cambiar el título dinámico -->
+<h2 id="tituloResultado"></h2>
+
+<!-- Mensaje dinámico -->
+<p id="mensajeCalificacion" class="mensaje-calificacion"></p>
+
+  <!-- Barra de progreso -->
+  <div class="barra-progreso">
+    <div id="barraProgreso" class="barra-progreso-interna"></div>
+  </div>
+
+  <!-- Botones: Inicio y Menú -->
+  <button onclick="window.location.href = '../EvaluacionDeNivel.html'">Inicio</button>
+  <button onclick="window.location.href = 'MenuPrincipal.html'">Menú</button>
+
+</div>
+
+<script src="ScriptResultados.js"></script>
+
+</body>
+</html>

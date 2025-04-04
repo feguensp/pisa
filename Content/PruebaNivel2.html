@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Rendimiento - Nivel intermedio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 10px 5px 0 5px;
+            /* Para separarlos un poco */
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        .pregunta {
+            display: none;
+        }
+
+        .pregunta.activa {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        /* Footer (derechos de autor) */
+        footer {
+            position: auto;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Fondo semi-transparente */
+            font-size: 0.9em;
+            color: #7f8c8d;
+            /* Color del texto suave */
+            font-weight: 300;
+            /* Texto más delgado */
+            font-size: small;
+        }
+
+        footer a {
+            color: #3498db;
+            /* Color del enlace */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            /* Subrayado al pasar el mouse */
+        }
+
+        .container1 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .item {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .cuadro-curveado {
+            border: 2px solid #ddd;
+            /* Borde suave */
+            border-radius: 15px;
+            /* Esquinas curveadas */
+            padding: 20px;
+            /* Espaciado interno */
+            background-color: #fff;
+            /* Fondo blanco */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Sombra suave */
+            margin: 20px auto;
+            /* Centrado horizontal */
+            text-align: left;
+            /* Alineación del texto a la izquierda */
+            max-width: 800px;
+            /* Máximo ancho */
+            width: auto;
+            /* Ancho automático */
+        }
+
+        /* Centrar la imagen dentro del cuadro-curveado */
+        .cuadro-curveado img {
+            display: block;
+            /* Hace que la imagen sea un bloque */
+            margin: 0 auto 10px auto;
+            /* Centra la imagen horizontalmente y añade margen inferior */
+        }
+
+        /* Justificar el texto a la izquierda */
+        .cuadro-curveado p {
+            text-align: left;
+            /* Justifica el texto a la izquierda */
+            margin: 0 0 10px 0;
+            /* Añade margen inferior a los párrafos */
+        }
+
+        /* Alinear la lista a la izquierda */
+        .cuadro-curveado ul {
+            text-align: left;
+            /* Alinea el texto de la lista a la izquierda */
+            margin: 0;
+            /* Elimina el margen predeterminado de la lista */
+            padding-left: 20px;
+            /* Añade un padding a la izquierda para la sangría */
+        }
+
+        .cuadro-curveado ul li {
+            margin-bottom: 10px;
+            /* Espaciado entre elementos de la lista */
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #E74C3C;
+            margin: 10px auto 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            font-style: italic;
+            /* Texto en cursiva */
+            color: #34495E;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        td:first-child,
+        th:first-child {
+            width: 5%;
+            /* Ajusta este valor según sea necesario */
+        }
+
+        td input[type="radio"] {
+            margin: 0 auto;
+            display: block;
+        }
+
+        #progressBarContainer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 0;
+            background-color: #f9f9f9;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            /* por encima del contenido */
+        }
+
+        .step {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin: 0 2px;
+            background-color: white;
+            /* Pregunta no contestada */
+            transition: background-color 0.3s;
+        }
+
+        .passed {
+            background-color: #a2d5f2;
+            /* Azul claro para pasadas */
+        }
+
+        .current {
+            background-color: #007BFF;
+            /* Azul oscuro para la actual */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progressBarContainer"></div>
+
+    <div class="container">
+        <h1>Prueba de Rendimiento - Nivel Intermedio</h1>
+        <!-- <p>Esta prueba está diseñada para evaluar tus conocimientos en distintas áreas y temas de nivel intermedio.</p> -->
+
+        <!-- PREGUNTA 1 -->
+        <div class="pregunta activa" id="pregunta1">
+            <h2>GALLETAS</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/alerta de alergia.png"
+                    alt="Imagen de la prueba">
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;"><strong></strong>¿Cuál es la finalidad de este aviso?
+                    </th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Prevenir a las personas acerca de las galletas.</td>
+                    <td><input type="radio" name="q1" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Que las galletas con cierto ingrediente compradas después de la fecha de caducidad se pueden
+                        devolver.</td>
+                    <td><input type="radio" name="q1" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Explicar dónde comprar galletas rellenas de chocolate.</td>
+                    <td><input type="radio" name="q1" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>Que las galletas que llevan cierto ingrediente no declarado se pueden devolver si no te gusta.
+                    </td>
+                    <td><input type="radio" name="q1" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="window.location.href='MenuPrincipal.html'">Menú</a></button>
+            <button onclick="mostrarPregunta(2)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 2 -->
+        <div class="pregunta" id="pregunta2">
+            <h2>GALLETAS</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/alerta de alergia.png"
+                    alt="Imagen de la prueba">
+            </div>
+
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;"><strong></strong>¿Por qué es importante la fecha de
+                        caducidad en los paquetes de galletas?</th>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Para que sepas qué paquetes contienen un ingrediente que puede producir alergias.</td>
+                    <td><input type="radio" name="q2" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Para decirte cuando el aviso de alerta deja de tener validez.</td>
+                    <td><input type="radio" name="q2" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Para decirte cuando las galletas pierden sus propiedades alimentarias.</td>
+                    <td><input type="radio" name="q2" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>Para decirte cuando caducan.</td>
+                    <td><input type="radio" name="q2" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(1)">Anterior</button>
+            <button onclick="mostrarPregunta(3)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 3 -->
+        <div class="pregunta" id="pregunta3">
+            <h2>EDIFICIOS ALTOS</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/edificios altos.png"
+                    alt="Imagen de la prueba">
+                <br>
+                <p>“Edificios altos” es un artículo de una revista mexicana publicada en 2006.</p>
+            </div>
+
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;"></strong> ¿Qué tipo de información proporciona el
+                        Gráfico I?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>El número de edificios que superan una determinada altura en varias ciudades.</td>
+                    <td><input type="radio" name="q3" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>El número total de edificios en distintas ciudades.</td>
+                    <td><input type="radio" name="q3" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Una comparación de la altura de distintos edificios.</td>
+                    <td><input type="radio" name="q3" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>Información sobre el estilo de los edificios de distintas ciudades.</td>
+                    <td><input type="radio" name="q3" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(2)">Anterior</button>
+            <button onclick="mostrarPregunta(4)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 4 -->
+        <div class="pregunta" id="pregunta4">
+            <h2>EDIFICIOS ALTOS</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/edificios altos.png"
+                    alt="Imagen de la prueba">
+                <p> “Edificios altos” es un artículo de una revista mexicana publicada en 2006.</p>
+
+                <p>Imagínate que un artículo como este, sobre edificios altos, se publica de nuevo dentro de 20 años.
+                </p>
+
+                <p>A continuación, se incluyen dos elementos del artículo original.
+                    Indica si es o no probable que estos elementos cambien en 20 años
+                    seleccionando <strong>Si</strong> o <strong>No</strong> en la tabla siguiente.</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="2" style="text-align: center;">Elemento del artículo</th>
+                    <th>Sí</th>
+                    <th>No</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Los países mencionados en el Gráfico I.</td>
+                    <td><input type="radio" name="q4_1" value="S"></td>
+                    <td><input type="radio" name="q4_1" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>El título del Gráfico II.</td>
+                    <td><input type="radio" name="q4_2" value="S"></td>
+                    <td><input type="radio" name="q4_2" value="N"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(3)">Anterior</button>
+            <button onclick="mostrarPregunta(5)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 5 -->
+        <div class="pregunta" id="pregunta5">
+            <h2>METEROIDES</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/meteorito.webp"
+                    alt="Imagen de la prueba">
+                <p>A Tomás le gusta mirar las estrellas. Sin embargo, no puede observarlas muy bien por la noche porque
+                    vive
+                    en una gran ciudad.</p>
+                <p>El año pasado Tomás fue al campo y escaló una montaña desde donde observó un gran número de estrellas
+                    que
+                    no puede ver habitualmente cuando está en la ciudad.</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">¿Por qué se pueden observar más estrellas en el campo
+                        que en las ciudades donde vive la mayoría de la gente?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>La luna es más luminosa en las ciudades y amortigua la luz de muchas estrellas.</td>
+                    <td><input type="radio" name="q5" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Hay más polvo que refleja la luz en el aire del campo que en el aire de la ciudad.</td>
+                    <td><input type="radio" name="q5" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>La contaminación lumínica de la ciudad afecta a la observación de las estrellas.</td>
+                    <td><input type="radio" name="q5" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>El consumo eléctrico de las grandes ciudades es muy alto.</td>
+                    <td><input type="radio" name="q5" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(4)">Anterior</button>
+            <button onclick="mostrarPregunta(6)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 6 -->
+        <div class="pregunta" id="pregunta6">
+            <h2>METEROIDES</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/meteorito.webp"
+                    alt="Imagen de la prueba">
+                <p>A Tomás le gusta mirar las estrellas. Sin embargo, no puede observarlas muy bien por la noche porque
+                    vive
+                    en una gran ciudad.</p>
+                <p>El año pasado Tomás fue al campo y escaló una montaña desde donde observó un gran número de estrellas
+                    que
+                    no puede ver habitualmente cuando está en la ciudad.</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">¿Por qué un telescopio con una lente de gran diámetro
+                        permite observar las estrellas de escaso brillo?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Cuanto mayor es la lente más luz capta.</td>
+                    <td><input type="radio" name="q6" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Cuanto mayor es la lente mayor es el aumento.</td>
+                    <td><input type="radio" name="q6" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>La contaminación lumínica no afecta a las lentes grandes.</td>
+                    <td><input type="radio" name="q6" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>La contaminación lumínica no afecta a los telescopios grandes.</td>
+                    <td><input type="radio" name="q6" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(5)">Anterior</button>
+            <button onclick="mostrarPregunta(7)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 7 -->
+        <div class="pregunta" id="pregunta7">
+            <h2>EL GRAN CAÑÓN</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/gran cañon.jpg"
+                    alt="Imagen de la prueba">
+
+                <p>El Gran Cañón está situado en un desierto de los Estados Unidos. Es un cañón muy largo y profundo
+                    que contiene muchos estratos de rocas. En algún momento del pasado, los movimientos de la
+                    corteza terrestre levantaron estos estratos. Hoy en día el Gran Cañón tiene 1,6 km de
+                    profundidad en algunas zonas. El río Colorado fluye por el fondo del cañón.</p>
+
+                <p>Mira la siguiente foto del Gran Cañón, tomada desde su orilla sur. En las paredes del cañón se pueden
+                    ver los diferentes estratos de rocas.</p>
+
+                <p>Cada año unos cinco millones de personas visitan el parque nacional del Gran Cañón. Existe
+                    preocupación
+                    por el deterioro que está sufriendo el parque debido al elevado número de visitantes.</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="2" style="text-align: center;">¿Es posible responder esta pregunta mediante una
+                        investigación científica?</th>
+                    <th>Sí</th>
+                    <th>No</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>¿El parque es tan bello como hace 100 años?</td>
+                    <td><input type="radio" name="q7_1" value="S"></td>
+                    <td><input type="radio" name="q7_1" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>¿El parque se hubiese deteriorado menos si todos los visitantes hubiesen sido delgados?</td>
+                    <td><input type="radio" name="q7_2" value="S"></td>
+                    <td><input type="radio" name="q7_2" value="N"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(6)">Anterior</button>
+            <button onclick="mostrarPregunta(8)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 8 -->
+        <div class="pregunta" id="pregunta8">
+            <h2>EL GRAN CAÑÓN</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/gran cañon.jpg"
+                    alt="Imagen de la prueba">
+
+                <p>El Gran Cañón está situado en un desierto de los Estados Unidos. Es un cañón muy largo y profundo
+                    que contiene muchos estratos de rocas. En algún momento del pasado, los movimientos de la
+                    corteza terrestre levantaron estos estratos. Hoy en día el Gran Cañón tiene 1,6 km de
+                    profundidad en algunas zonas. El río Colorado fluye por el fondo del cañón.</p>
+
+                <p>Mira la siguiente foto del Gran Cañón, tomada desde su orilla sur. En las paredes del cañón se pueden
+                    ver los diferentes estratos de rocas.</p>
+
+                <p>La temperatura en el Gran Cañón varía de menos de 0º C a más de 40º C. Aunque la zona es desértica,
+                    las
+                    grietas de las rocas a veces contienen agua.</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">¿De qué manera estos cambios de temperatura y la
+                        presencia de agua en las grietas de
+                        las rocas contribuyen a acelerar el desmenuzamiento de las rocas?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>El agua congelada disuelve las rocas calientes.</td>
+                    <td><input type="radio" name="q8" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>El hielo pule la superficie de las rocas.</td>
+                    <td><input type="radio" name="q8" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>El agua que hay en las grietas aumenta de volumen al congelarse y rompe las rocas.</td>
+                    <td><input type="radio" name="q8" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>El agua cementa a las rocas entre sí.</td>
+                    <td><input type="radio" name="q8" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(7)">Anterior</button>
+            <button onclick="mostrarPregunta(9)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 9 -->
+        <div class="pregunta" id="pregunta9">
+            <h2>VELOCIDAD DE UN COCHE</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/velocidad de un coche.png"
+                    alt="Imagen de la prueba">
+                <p>Este gráfico muestra cómo varía la velocidad de un coche de carreras a lo largo de una pista llana de
+                    3 km durante su segunda vuelta.</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">¿Cuál es la distancia aproximada desde la línea de
+                        salida hasta el comienzo del tramo recto más largo?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>2,6 km</td>
+                    <td><input type="radio" name="q9" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>1,5 km</td>
+                    <td><input type="radio" name="q9" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>0,5 km</td>
+                    <td><input type="radio" name="q9" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>2,3 km</td>
+                    <td><input type="radio" name="q9" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(8)">Anterior</button>
+            <button onclick="mostrarPregunta(10)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 10 -->
+        <div class="pregunta" id="pregunta10">
+            <h2>VELOCIDAD DE UN COCHE</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/velocidad de un coche.png"
+                    alt="Imagen de la prueba">
+                <p>Este gráfico muestra cómo varía la velocidad de un coche de carreras a lo largo de una pista llana de
+                    3 km durante su segunda vuelta.</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">¿Qué se puede decir sobre la velocidad del coche entre
+                        el km 1,8 y el 2,2?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>No se puede hallar la velocidad basándose en este gráfico.</td>
+                    <td><input type="radio" name="q10" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>La velocidad del coche permanece constante.</td>
+                    <td><input type="radio" name="q10" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>La velocidad del coche es creciente.</td>
+                    <td><input type="radio" name="q10" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>La velocidad del coche es decreciente.</td>
+                    <td><input type="radio" name="q10" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(9)">Anterior</button>
+            <button onclick="mostrarPregunta(11)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 11 -->
+        <div class="pregunta" id="pregunta11">
+            <h2>MP3</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/music city especialistas de mp3.png"
+                    alt="Imagen de la prueba">
+                <p>Antia sumó los precios del reproductor de MP3, el cable y los altavoces en su calculadora. El
+                    resultado
+                    que obtuvo fue <b>271</b>.</p>
+                <p>El resultado de Antia es incorrecto. Cometió uno de los siguientes errores.</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">¿Qué error cometió?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Olvidó incluir uno de los tres precios.</td>
+                    <td><input type="radio" name="q11" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Sumó uno de los precios dos veces.</td>
+                    <td><input type="radio" name="q11" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Dejó sin introducir la última cifra de uno de los precios.</td>
+                    <td><input type="radio" name="q11" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>Restó uno de los precios en lugar de sumarlo.</td>
+                    <td><input type="radio" name="q11" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(10)">Anterior</button>
+            <button onclick="mostrarPregunta(12)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 12 -->
+        <div class="pregunta" id="pregunta12">
+            <h2>MP3</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/music city especialistas de mp3.png"
+                    alt="Imagen de la prueba">
+                <p>El precio de venta normal de los artículos del MP3 incluye un beneficio del 32,5 %. El precio sin
+                    este
+                    beneficio se denomina precio de venta al por mayor. El beneficio se calcula como un porcentaje del
+                    precio de venta al por mayor.</p>
+                <p>¿Indican las siguientes fórmulas una relación correcta entre el precio de venta al por mayor, m, y el
+                    precio de venta normal, v?</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="2" style="text-align: center;">¿Es correcta la fórmula?</th>
+                    <th>Sí</th>
+                    <th>No</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td><em>m = 0,325v</em></td>
+                    <td><input type="radio" name="q12_1" value="S"></td>
+                    <td><input type="radio" name="q12_1" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td><em>v = 132,5m / 100</em></td>
+                    <td><input type="radio" name="q12_2" value="S"></td>
+                    <td><input type="radio" name="q12_2" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td><em>m = 1,325v</em></td>
+                    <td><input type="radio" name="q12_3" value="S"></td>
+                    <td><input type="radio" name="q12_3" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td><em>v = 0,675m</em></td>
+                    <td><input type="radio" name="q12_4" value="S"></td>
+                    <td><input type="radio" name="q12_4" value="N"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(11)">Anterior</button>
+            <button onclick="mostrarPregunta(13)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 13 -->
+        <div class="pregunta" id="pregunta13">
+            <h2>MESSAGE</h2>
+            <div class="cuadro-curveado">
+                <img src="Imagenes para las pruebas de nivel/Imagenes para las pruebas de nivel/Prueba de nivel 2/cellphone.png"
+                    alt="Imagen de la prueba">
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Why did Sophie write this message?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>To check if Anna has completed her homework.</td>
+                    <td><input type="radio" name="q13" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>To let Anna know what they did in class today.</td>
+                    <td><input type="radio" name="q13" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>To ask Anna to contact her about the homework.</td>
+                    <td><input type="radio" name="q13" value="C"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(12)">Anterior</button>
+            <button onclick="mostrarPregunta(14)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 14 -->
+        <div class="pregunta" id="pregunta14">
+            <h2>YOUNG BLOG WRITERS</h2>
+            <div class="cuadro-curveado">
+                <p><strong>Tasha</strong></p>
+                <p style="font-style: italic">"Last year I wrote for my college magazine, which I found really difficult,
+                    but I don’t think it’s hard to write a good blog. Mine is about things
+                    from daily life that make me laugh. My older brother also has a blog,
+                    but we’re writing about different subjects. We don’t discuss what we’re
+                    planning, but we read each other’s blogs sometimes. I like giving advice
+                    to people who write in asking for it – it’s good to know I’ve helped."</p>
+
+                <p><strong>Danni</strong></p>
+                <p style="font-style: italic">"I started writing my popular film blog because I love movies. I like it
+                    when readers send me articles by email about a film they’ve seen, and
+                    I put these on my blog for everyone to read. I’m still at college, so
+                    I’m careful about spending too long on my blog, which is difficult as
+                    writing well takes time. I don’t think I’ll write it for much longer.
+                    I’m busy, and it’s time to do something new."</p>
+
+                <p><strong>Chrissie</strong></p>
+                <p style="font-style: italic">"I began writing on a school magazine. I stopped after a few years,
+                    but I missed it, so I started my own – I’m still writing it now!
+                    The blog’s new for me, and I write about daily life. I get ideas
+                    from friends or my sister when I can’t decide what to write about
+                    – we always think of something interesting, sad or serious. At first,
+                    almost nobody visited my site, but now more do, I’ve had some lovely comments."</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Who writes both a magazine and a blog?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Tasha.</td>
+                    <td><input type="radio" name="q14" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Danni.</td>
+                    <td><input type="radio" name="q14" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Chrissie.</td>
+                    <td><input type="radio" name="q14" value="C"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(13)">Anterior</button>
+            <button onclick="mostrarPregunta(15)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 15 -->
+        <div class="pregunta" id="pregunta15">
+            <h2>YOUNG BLOG WRITERS</h2>
+            <div class="cuadro-curveado">
+                <p><strong>Tasha</strong></p>
+                <p style="font-style: italic">"Last year I wrote for my college magazine, which I found really difficult,
+                    but I don’t think it’s hard to write a good blog. Mine is about things
+                    from daily life that make me laugh. My older brother also has a blog,
+                    but we’re writing about different subjects. We don’t discuss what we’re
+                    planning, but we read each other’s blogs sometimes. I like giving advice
+                    to people who write in asking for it – it’s good to know I’ve helped."</p>
+
+                <p><strong>Danni</strong></p>
+                <p style="font-style: italic">"I started writing my popular film blog because I love movies. I like it
+                    when readers send me articles by email about a film they’ve seen, and
+                    I put these on my blog for everyone to read. I’m still at college, so
+                    I’m careful about spending too long on my blog, which is difficult as
+                    writing well takes time. I don’t think I’ll write it for much longer.
+                    I’m busy, and it’s time to do something new."</p>
+
+                <p><strong>Chrissie</strong></p>
+                <p style="font-style: italic">"I began writing on a school magazine. I stopped after a few years,
+                    but I missed it, so I started my own – I’m still writing it now!
+                    The blog’s new for me, and I write about daily life. I get ideas
+                    from friends or my sister when I can’t decide what to write about
+                    – we always think of something interesting, sad or serious. At first,
+                    almost nobody visited my site, but now more do, I’ve had some lovely comments."</p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Who asks a member of her family to help her write her
+                        blog?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Tasha.</td>
+                    <td><input type="radio" name="q15" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Danni.</td>
+                    <td><input type="radio" name="q15" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Chrissie.</td>
+                    <td><input type="radio" name="q15" value="C"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(14)">Anterior</button>
+            <button onclick="mostrarPregunta(16)">Siguiente</button>
+        </div>
+
+        <!-- PREGUNTA 16 -->
+        <div class="pregunta" id="pregunta16">
+
+            <h2>Choose de correct answer</h2>
+            <div class="cuadro-curveado">
+                <p><strong>William Perkin</strong></p>
+
+                <p>William Perkin was born in London in 1838.
+                    As a child he had many hobbies, including model making and photography.
+                    But it was the <select name="q16_1">
+                        <option value="" disabled selected>--Select--</option>
+                        <option value="class">class</option>
+                        <option value="subjet">subjet</option>
+                        <option value="course">course</option>
+                    </select> of chemistry that really interested him.
+                    At the age of 15, he went to college to study it. </p>
+
+                <p>While he was there, he was
+                    <select name="q16_2">
+                        <option value="" disabled selected>--Select--</option>
+                        <option value="thinking">thinking</option>
+                        <option value="trying">trying</option>
+                        <option value="deciding">deciding</option>
+                    </select>
+                    to make a medicine from coal.
+                    This didn’t go well, but when he was working on the problem,
+                    he found a cheap
+                    <select name="q16_3">
+                        <option value="" disabled selected>--Select--</option>
+                        <option value="way">way</option>
+                        <option value="path">path</option>
+                        <option value="plan">plan</option>
+                    </select>
+                    to make the colour purple.
+                    At that day/time/hour
+                    <select name="q16_4">
+                        <option value="" disabled selected>--Select--</option>
+                        <option value="day">day</option>
+                        <option value="time">time</option>
+                        <option value="hour">hour</option>
+                    </select>
+                    it was very expensive to make clothes in different colours.
+                    William knew he could make a business out of his new colour
+                    . Helped by his father and brother, William
+                    <select name="q16_5">
+                        <option value="" disabled selected>--Select--</option>
+                        <option value="brought">brought</option>
+                        <option value="turned">turned</option>
+                        <option value="opened">opened</option>
+                    </select>
+                    his own factory to make the colour.
+                    It sold well, and soon purple clothes
+                    <select name="q16_6">
+                        <option value="" disabled selected>--Select--</option>
+                        <option value="began">began</option>
+                        <option value="arrived">arrived</option>
+                        <option value="became">became</option>
+                    </select>
+                    very popular in England and the rest of the world.
+                </p>
+                </p>
+            </div>
+
+            <button onclick="mostrarPregunta(15)">Anterior</button>
+            <button onclick="mostrarPregunta()">Finalizar</button>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Todos los derechos de autor y propiedad intelectual son respetados. <br>
+        Contenido descargado de la plataforma Proyecto Descartes <br>
+        <a href="#" target="_blank">Política de privacidad</a> |
+        <a href="#" target="_blank">Términos de uso</a>
+    </footer>
+    <script src="ScriptNivel2.js"></script>
+</body>
+
+</html>

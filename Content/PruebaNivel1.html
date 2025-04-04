@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Rendimiento - Nivel Principiante</title>
+    <link href="stylePruebaNivel1.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <div id="progressBarContainer"></div>
+
+    <div class="container">
+        <h1>Prueba de Rendimiento - Nivel Principiante</h1>
+
+        <!-- Pregunta 1 -->
+        <div class="pregunta activa" id="pregunta1">
+            <h2>Aldeas Infantiles</h2>
+            <div class="cuadro-curveado">
+                <img src="./Multimedia/IMGAldea.png" alt="Imagen de Aldeas Infantiles">
+                <p> Una campaña de Aldeas Infantiles SOS gana la 2ª edición de Notodopublifest.com
+                </p>
+                <p>Óscar Alonso Casquero y Esteban Franco, con su campaña publicitaria "Cartones" para Aldeas Infantiles
+                    SOS, han ganado el gran premio del jurado de notodopublifest.com, dedicado en esta ocasión a la
+                    publicidad en prensa. El certamen ha tenido un alto índice de participación, con 4808 piezas
+                    llegadas desde 17 países diferentes.</p>
+                <P>Notodopublifest ha celebrado la segunda edición de notodopublifest.com, el festival de publicidad
+                    "Hecho
+                    por Mí". Como indica el propio nombre del festival, se parte del hecho de pensar que todo el mundo
+                    puede
+                    ser artista.</P>
+                <P>¿Por qué no intentarlo sin más intención que jugar a inventar, a crear, a hacer cultura, y optar a
+                    unos
+                    premios que pretenden convertir este festival en un cuadrilátero al que, sin lugar a duda, merezca
+                    la
+                    pena subir?</P>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;"><strong> A juzgar por la información
+                            contenida en el texto, "Aldeas Infantiles" es:</strong></th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td> Un club social para niños.</td>
+                    <td><input type="radio" name="q1" value="A" required></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Un centro para niños huérfanos.</td>
+                    <td><input type="radio" name="q1" value="B" required></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Un internado para niños con problemas de conducta.</td>
+                    <td><input type="radio" name="q1" value="C" required></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>Una ONG que ayuda a niños sin hogar.</td>
+                    <td><input type="radio" name="q1" value="D" required></td>
+                </tr>
+            </table>
+            <div class="error" id="error"></div>
+            <button onclick="window.location.href='MenuPrincipal.html'">Menú</a></button>
+            <button onclick="mostrarPregunta(2)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="pregunta" id="pregunta2">
+            <h2>Aldeas Infantiles</h2>
+            <div class="cuadro-curveado">
+                <img src="Multimedia/IMGAldea.png" alt="Imagen de Aldeas Infantiles">
+                <p>Una campaña de Aldeas Infantiles SOS gana la 2ª edición de Notodopublifest.com
+                </p>
+                <p>Óscar Alonso Casquero y Esteban Franco, con su campaña publicitaria "Cartones" para Aldeas Infantiles
+                    SOS, han ganado el gran premio del jurado de notodopublifest.com, dedicado en esta ocasión a la
+                    publicidad en prensa. El certamen ha tenido un alto índice de participación, con 4808 piezas
+                    llegadas
+                    desde 17 países diferentes.</p>
+                <P>Notodopublifest ha celebrado la segunda edición de notodopublifest.com, el festival de publicidad
+                    "Hecho
+                    por Mí". Como indica el propio nombre del festival, se parte del hecho de pensar que todo el mundo
+                    puede
+                    ser artista.</P>
+                <P>¿Por qué no intentarlo sin más intención que jugar a inventar, a crear, a hacer cultura, y optar a
+                    unos
+                    premios que pretenden convertir este festival en un cuadrilátero al que, sin lugar a duda, merezca
+                    la
+                    pena subir?</P>
+            </div>
+            <form>
+                <table>
+                    <tr>
+                        <th colspan="2" style="text-align: center;">Marca las casillas correspondientes:</th>
+                        <th>Verdadero</th>
+                        <th>Falso</th>
+                    </tr>
+                    <tr>
+                        <td><strong>A)</strong></td>
+                        <td>El festival fomenta la creatividad de cualquier persona.</td>
+                        <td><input type="radio" name="q2_1" value="V"></td>
+                        <td><input type="radio" name="q2_1" value="F"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>B)</strong></td>
+                        <td>Este certamen ha tenido una alta participación.</td>
+                        <td><input type="radio" name="q2_2" value="V"></td>
+                        <td><input type="radio" name="q2_2" value="F"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>C)</strong></td>
+                        <td>Notopublifest es una ONG.</td>
+                        <td><input type="radio" name="q2_3" value="V"></td>
+                        <td><input type="radio" name="q2_3" value="F"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>D)</strong></td>
+                        <td>A este certamen se presentaron 17 trabajos.</td>
+                        <td><input type="radio" name="q2_4" value="V"></td>
+                        <td><input type="radio" name="q2_4" value="F"></td>
+                    </tr>
+                </table>
+            </form>
+            <button onclick="mostrarPregunta(1)">Anterior</button>
+            <button onclick="mostrarPregunta(3)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="pregunta" id="pregunta3">
+            <h2>Foro de Aves</h2>
+            <div class="cuadro-curveado">
+                <p> <strong> Has ido a visitar a unos parientes que recientemente se han mudado a una
+                        granja para criar gallinas.</strong> </p>
+
+                <p> Tú le preguntas a tu tía: "¿Cómo aprendiste a criar gallinas?".</p>
+
+                <p>Ella dice: "Hablamos con mucha gente que cría gallinas, y hay muchos recursos en Internet.
+                    Por ejemplo, hay un foro sobre la salud de las aves que me gusta visitar.
+                    Me fue de gran ayuda cuando hace poco una de mis gallinas se hizo daño en la pata.
+                    Te voy a enseñar la conversación que tuvimos."</p>
+                <img src="Multimedia/IMGAves3.png   " alt="Imagen de una granja"> <br>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;"> ¿Por qué Inma_88 decide
+                        publicar su pregunta en un foro de internet?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td> Porque no sabe cómo encontrar un veterinario.</td>
+                    <td><input type="radio" name="q3" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Porque cree que el problema de su gallina no es grave.</td>
+                    <td><input type="radio" name="q3" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Porque quiere ayudar a su gallina lo antes posible.</td>
+                    <td><input type="radio" name="q3" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>Porque no puede permitirse un veterinario.</td>
+                    <td><input type="radio" name="q3" value="D"></td>
+                </tr>
+            </table>
+
+            <button onclick="mostrarPregunta(2)">Anterior</button>
+            <button onclick="mostrarPregunta(4)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="pregunta" id="pregunta4">
+            <h2>Foro de Aves</h2>
+            <div class="cuadro-curveado">
+                <p> <strong> Has ido a visitar a unos parientes que recientemente se han mudado a una
+                        granja para criar gallinas.</strong> </p>
+
+                <p> Tú le preguntas a tu tía: "¿Cómo aprendiste a criar gallinas?".</p>
+
+                <p>Ella dice: "Hablamos con mucha gente que cría gallinas, y hay muchos recursos en Internet.
+                    Por ejemplo, hay un foro sobre la salud de las aves que me gusta visitar.
+                    Me fue de gran ayuda cuando hace poco una de mis gallinas se hizo daño en la pata.
+                    Te voy a enseñar la conversación que tuvimos."</p>
+                <img src="Multimedia/IMGAves3.png   " alt="Imagen de una granja">
+            </div>
+            <form>
+                <table>
+                    <tr>
+                        <th colspan="2" style="text-align: center;">¿Es esta publicación relevante para el problema de
+                            Inma_88?</th>
+                        <th>Si</th>
+                        <th>No</th>
+                    </tr>
+                    <tr>
+                        <td><strong>A)</strong></td>
+                        <td>Publicación de NuriaB79.</td>
+                        <td><input type="radio" name="q4_1" value="S"> </td>
+                        <td> <input type="radio" name="q4_1" value="N"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>B)</strong></td>
+                        <td>Publicación de Mónica.</td>
+                        <td><input type="radio" name="q4_2" value="S"></td>
+                        <td><input type="radio" name="q4_2" value="N"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>C)</strong></td>
+                        <td>Publicación de Ofertas Aviarias.</td>
+                        <td><input type="radio" name="q4_3" value="S"></td>
+                        <td><input type="radio" name="q4_3" value="N"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>D)</strong></td>
+                        <td>Publicación de Bruno.</td>
+                        <td><input type="radio" name="q4_4" value="S"></td>
+                        <td><input type="radio" name="q4_4" value="N"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>E)</strong></td>
+                        <td>Publicación de Francisco.</td>
+                        <td><input type="radio" name="q4_5" value="S"></td>
+                        <td><input type="radio" name="q4_5" value="N"></td>
+                    </tr>
+                </table>
+            </form>
+            <button onclick="mostrarPregunta(3)">Anterior</button>
+            <button onclick="mostrarPregunta(5)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="pregunta" id="pregunta5">
+            <h2>Trabajo con Calor</h2>
+            <div class="cuadro-curveado">
+                <p>Pedro está haciendo reparaciones en una casa vieja. Ha dejado una botella de
+                    agua, algunos clavos metálicos y un trozo de madera dentro del maletero de su coche. Después de que
+                    el
+                    coche ha estado tres horas al sol, la temperatura dentro del coche llega a unos 40°C.</p>
+                <img src="Multimedia/IMGBaul.png" alt="Imagen de un coche al sol">
+            </div>
+            <table>
+                <tr>
+                    <th colspan="2" style="text-align: center;">¿Qué les pasa a los objetos del coche?</th>
+                    <th>Sí</th>
+                    <th>No</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Los tres cuerpos alcanzan el equilibrio térmico.</td>
+                    <td><input type="radio" name="q5_1" value="S"></td>
+                    <td><input type="radio" name="q5_1" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Todos tienen la misma temperatura.</td>
+                    <td><input type="radio" name="q5_2" value="S"></td>
+                    <td><input type="radio" name="q5_2" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Después de un rato los clavos están rojos incandescentes.</td>
+                    <td><input type="radio" name="q5_3" value="S"></td>
+                    <td><input type="radio" name="q5_3" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>Todos tienen diferente temperatura.</td>
+                    <td><input type="radio" name="q5_4" value="S"></td>
+                    <td><input type="radio" name="q5_4" value="N"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(4)">Anterior</button>
+            <button onclick="mostrarPregunta(6)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="pregunta" id="pregunta6">
+            <h2>Trabajo con Calor</h2>
+            <div class="cuadro-curveado">
+                <p>Para beber durante el día, Pedro tiene una taza de café caliente a unos 80ºC
+                    de temperatura y una taza con agua mineral fría a unos 6ºC de temperatura. Las tazas son del mismo
+                    material y tamaño, y el volumen contenido en cada taza es el mismo. Pedro deja las tazas en una
+                    habitación donde la temperatura es de unos 16ºC.</p>
+                <img src="Multimedia/IMGCafe.png" alt="Imagen de tazas de café y agua">
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;"><strong>¿Cuáles serán probablemente las temperaturas del
+                            café y del agua mineral
+                            después de 10 minutos? </strong></th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>68ºC y 18ºC.</td>
+                    <td><input type="radio" name="q6" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>68ºC y 10ºC.</td>
+                    <td><input type="radio" name="q6" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>16ºC y 16ºC.</td>
+                    <td><input type="radio" name="q6" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>68ºC y 6ºC.</td>
+                    <td><input type="radio" name="q6" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(5)">Anterior</button>
+            <button onclick="mostrarPregunta(7)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="pregunta" id="pregunta7">
+            <h2>Biodiversidad</h2>
+            <div class="cuadro-curveado">
+                <img src="Multimedia/IMGBiodiversidad.png" alt="Imagen de biodiversidad">
+                <p> <strong> La biodiversidad es clave para la gestión del medio ambiente.</strong><br><br>
+
+                    Un ecosistema que mantiene una biodiversidad alta (es decir, una amplia variedad de seres vivos) se
+                    adapta
+                    con mayor probabilidad a los cambios medioambientales causados por el hombre que tenga poca
+                    biodiversidad. <br><br>
+
+                    Consideremos las dos redes tróficas representadas en el diagrama. Las flechas van desde el organismo
+                    que es comido hasta el que se lo come. Estas redes tróficas son muy simples en comparación con las
+                    redes
+                    tróficas de los ecosistemas reales, pero aun así reflejan una diferencia entre los ecosistemas
+                    más diversos y los menos diversos.<br><br>
+
+                    La red trófica B representa una situación con biodiversidad muy baja, donde en algunos niveles el
+                    flujo
+                    de alimento incluye solo un tipo de organismo. La red trófica A representa un ecosistema más diverso
+                    y,
+                    por lo tanto, con más alternativas en los flujos de alimento.<br><br>
+
+                    En general, la pérdida de biodiversidad debería ser considerada en serio, no solo porque los
+                    organismos
+                    que se están extinguiendo representan una gran pérdida tanto por razones éticas como utilitarias
+                    (beneficios útiles), sino también porque los organismos que sobrevivan serán más vulnerables a la
+                    extinción en el futuro.<br><br>
+                </p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;"><strong>En el texto se lee que "La red trófica A
+                            representa un ecosistema más diverso
+                            y, por lo tanto, con más alternativas en los flujos de alimento". Observa la RED TRÓFICA A,
+                            solo dos
+                            animales de esta red tienen tres fuentes directas de alimentación. ¿Cuáles son? </strong>
+                    </th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>El pájaro de la miel y el petirrojo.</td>
+                    <td><input type="radio" name="q7" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>La cigarra saltadora y el gato marsupial.</td>
+                    <td><input type="radio" name="q7" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>El gato marsupial y el pájaro de la miel.</td>
+                    <td><input type="radio" name="q7" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>La avispa parásita y el gato marsupial.</td>
+                    <td><input type="radio" name="q7" value="D"></td>
+                </tr>
+                <tr>
+                    <td><strong>E)</strong></td>
+                    <td>El gato marsupial y el pájaro carnicero.</td>
+                    <td><input type="radio" name="q7" value="E"></td>
+                </tr>
+            </Table>
+            <button onclick="mostrarPregunta(6)">Anterior</button>
+            <button onclick="mostrarPregunta(8)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 8 -->
+        <div class="pregunta" id="pregunta8">
+            <h2>Biodiversidad</h2>
+            <div class="cuadro-curveado">
+                <img src="Multimedia/IMGBiodiversidad.png" alt="Imagen de biodiversidad">
+                <p> <strong> La biodiversidad es clave para la gestión del medio ambiente.</strong><br><br>
+
+                    Un ecosistema que mantiene una biodiversidad alta (es decir, una amplia variedad de seres vivos) se
+                    adapta
+                    con mayor probabilidad a los cambios medioambientales causados por el hombre que tenga poca
+                    biodiversidad. <br><br>
+
+                    Consideremos las dos redes tróficas representadas en el diagrama. Las flechas van desde el organismo
+                    que es comido hasta el que se lo come. Estas redes tróficas son muy simples en comparación con las
+                    redes
+                    tróficas de los ecosistemas reales, pero aun así reflejan una diferencia entre los ecosistemas
+                    más diversos y los menos diversos.<br><br>
+
+                    La red trófica B representa una situación con biodiversidad muy baja, donde en algunos niveles el
+                    flujo
+                    de alimento incluye solo un tipo de organismo. La red trófica A representa un ecosistema más diverso
+                    y,
+                    por lo tanto, con más alternativas en los flujos de alimento.<br><br>
+
+                    En general, la pérdida de biodiversidad debería ser considerada en serio, no solo porque los
+                    organismos
+                    que se están extinguiendo representan una gran pérdida tanto por razones éticas como utilitarias
+                    (beneficios útiles), sino también porque los organismos que sobrevivan serán más vulnerables a la
+                    extinción en el futuro.<br><br>
+                </p>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;"> Las redes tróficas A y B están en diferentes
+                        localidades.
+                        Supón que las avispas parásitas se extinguieron en ambos lugares. ¿Cuáles de las siguientes
+                        serían
+                        la mejor predicción y explicación del efecto que tendría este hecho en las redes tróficas?
+                    </th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>El efecto sería mayor en la red trófica B porque el lagarto solo tiene una fuente de comida en
+                        la
+                        red B.</td>
+                    <td><input type="radio" name="q8" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>El efecto sería mayor en la red trófica A porque el lagarto tiene varias fuentes de comida en la
+                        red A.</td>
+                    <td><input type="radio" name="q8" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>El efecto sería mayor en la red trófica A porque el lagarto tiene una fuente de comida en la red
+                        A.</td>
+                    <td><input type="radio" name="q8" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>El efecto sería mayor en la red trófica B porque el lagarto tiene varias fuentes de comida en la
+                        red B.</td>
+                    <td><input type="radio" name="q8" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(7)">Anterior</button>
+            <button onclick="mostrarPregunta(9)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 9 -->
+        <div class="pregunta" id="pregunta9">
+            <h2>¿Qué Coche?</h2>
+            <div class="cuadro-curveado">
+                <img src="Multimedia/maxresdefault.jpg" alt="Imagen de coches">
+                <p>Cris acaba de sacarse el carné de conducir y quiere comprar su primer coche.<br><br>
+                    La siguiente tabla muestra las características de cuatro coches que vio en un concesionario de la
+                    zona.
+                </p>
+
+                <img src="Multimedia/Tabla.png" alt="Imagen de tabla de contenido">
+                <p><strong>Cris quiere un coche que cumpla todas estas condiciones:</strong></p>
+                <li>El kilometraje <strong>no</strong> debe superar los 99000 kilómetros.</li>
+                <li>Debe haberse fabricado en el año 2001 o en un año posterior.</li>
+                <li> Precio anunciado <strong>no</strong> debe superar los 4400 zeds. </li><br>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">
+                        ¿Qué coche cumple las condiciones de Cris?
+                    </th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>El Alpha.</td>
+                    <td><input type="radio" name="q9" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>El Bolte.</td>
+                    <td><input type="radio" name="q9" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>El Castel.</td>
+                    <td><input type="radio" name="q9" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>El Dezal.</td>
+                    <td><input type="radio" name="q9" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(8)">Anterior</button>
+            <button onclick="mostrarPregunta(10)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 10 -->
+        <div class="pregunta" id="pregunta10">
+            <h2>¿Qué Coche?</h2>
+            <div class="cuadro-curveado">
+                <img src="Multimedia/maxresdefault.jpg" alt="Imagen de coches">
+                <p>Cris acaba de sacarse el carné de conducir y quiere comprar su primer coche.<br><br>
+                    La siguiente tabla muestra las características de cuatro coches que vio en un concesionario de la
+                    zona.
+                </p>
+
+                <img src="Multimedia/Tabla.png" alt="Imagen de tabla de contenido">
+
+                <p><strong>Cris quiere un coche que cumpla todas estas condiciones:</strong></p>
+                <li>El kilometraje <strong>no</strong> debe superar los 99000 kilómetros.</li>
+                <li>Debe haberse fabricado en el año 2001 o en un año posterior.</li>
+                <li> Precio anunciado <strong>no</strong> debe superar los 4400 zeds. </li><br>
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">¿Qué coche tiene mayor cilindrada?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>El Alpha.</td>
+                    <td><input type="radio" name="q10" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>El Bolte.</td>
+                    <td><input type="radio" name="q10" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>El Castel.</td>
+                    <td><input type="radio" name="q10" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>El Dezal.</td>
+                    <td><input type="radio" name="q10" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(9)">Anterior</button>
+            <button onclick="mostrarPregunta(11)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 11 -->
+        <div class="pregunta" id="pregunta11">
+            <h2>Club de Voley</h2>
+            <div class="cuadro-curveado">
+                <p>En un pueblo de la costa, el club de Voley Playa ha organizado un campeonato
+                    para promocionar este deporte.</p>
+
+                <p> Según la normativa internacional, la cancha de juego debe ser un
+                    rectángulo de 16 m x 8 m, rodeado por una zona libre, con un mínimo de 3 m de ancho.</p>
+
+                <p> La cancha que se ha construido en el pueblo tiene la siguiente forma:</p>
+
+                <img src="Multimedia/IMGVoley.png" alt="Imagen de la cancha de voley">
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">El área de la zona libre se puede descomponer en:</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>Cuatro rectángulos.</td>
+                    <td><input type="radio" name="q11" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>Cuatro rectángulos y un círculo.</td>
+                    <td><input type="radio" name="q11" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>Dos rectángulos y dos círculos.</td>
+                    <td><input type="radio" name="q11" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>Cuatro rectángulos y cuatro círculos.</td>
+                    <td><input type="radio" name="q11" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(10)">Anterior</button>
+            <button onclick="mostrarPregunta(12)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 12 -->
+        <div class="pregunta" id="pregunta12">
+            <h2>Club de Voley</h2>
+            <div class="cuadro-curveado">
+                <p>En un pueblo de la costa, el club de Voley Playa ha organizado un campeonato
+                    para promocionar este deporte.</p>
+
+                <p> Según la normativa internacional, la cancha de juego debe ser un
+                    rectángulo de 16 m x 8 m, rodeado por una zona libre, con un mínimo de 3 m de ancho.</p>
+
+                <p> La cancha que se ha construido en el pueblo tiene la siguiente forma:</p>
+
+                <img src="Multimedia/IMGVoley.png" alt="Imagen de la cancha de voley">
+            </div>
+            <table>
+                <tr>
+                    <th colspan="3" style="text-align: center;">¿Cuál es la superficie de la zona libre?</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>401,04 m².</td>
+                    <td><input type="radio" name="q12" value="A"></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>413,00 m².</td>
+                    <td><input type="radio" name="q12" value="B"></td>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>395,00 m².</td>
+                    <td><input type="radio" name="q12" value="C"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>807,04 m².</td>
+                    <td><input type="radio" name="q12" value="D"></td>
+                </tr>
+            </table>
+            <button onclick="mostrarPregunta(11)">Anterior</button>
+            <button onclick="mostrarPregunta(13)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 13 -->
+        <div class="pregunta" id="pregunta13">
+            <h2>Preguntas Visuales</h2>
+            <p>Look and select.There are two examples.</p>
+            <div class="container2">
+                <div class="item">
+                    <img src="Multimedia/Uva.png" alt="Imagen 1">
+                    <p>These are grapes.</span></p>
+                    <p><span style="color: rgba(255, 0, 0, 0.74);"> (Example)</span></p>
+                    <label><input type="radio" name="q13_xs" checked disabled> True</label>
+                    <label><input type="radio" name="q13_xs" disabled> False</label>
+                </div>
+                <div class="item">
+                    <img src="Multimedia/mouse.png" alt="Imagen 2">
+                    <p>This is a house.</p>
+                    <p><span style="color: rgba(255, 0, 0, 0.74);"> (Example)</span></p>
+                    <label><input type="radio" name="q13_x" disabled> True</label>
+                    <label><input type="radio" name="q13_x" checked disabled> False</label>
+                </div>
+            </div>
+            <div class="container1">
+                <div class="item">
+                    <img src="Multimedia/moto.png" alt="Imagen 3">
+                    <p>This is a helicopter. </p>
+                    <label><input type="radio" name="q13_1" value="v"> True</label>
+                    <label><input type="radio" name="q13_1" value="f"> False</label>
+                </div>
+                <div class="item">
+                    <img src="Multimedia/reloj.png" alt="Imagen 4">
+                    <p>This is a clock.</p>
+                    <label><input type="radio" name="q13_2" value="v"> True</label>
+                    <label><input type="radio" name="q13_2" value="f"> False</label>
+                </div>
+                <div class="item">
+                    <img src="Multimedia/playa.png" alt="Imagen 5">
+                    <p>These are shells.</p>
+                    <label><input type="radio" name="q13_3" value="v"> True</label>
+                    <label><input type="radio" name="q13_3" value="f"> False</label>
+                </div>
+                <div class="item">
+                    <img src="Multimedia/zapatos.png" alt="Imagen 6">
+                    <p>This is a sock.</p>
+                    <label><input type="radio" name="q13_4" value="v"> True</label>
+                    <label><input type="radio" name="q13_4" value="f"> False</label>
+                </div>
+                <div class="item">
+                    <img src="Multimedia/sillas.png" alt="Imagen 7">
+                    <p>These are chairs.</p>
+                    <label><input type="radio" name="q13_5" value="v"> True</label>
+                    <label><input type="radio" name="q13_5" value="f"> False</label>
+                </div>
+            </div> <br><br>
+            <button onclick="mostrarPregunta(12)">Anterior</button>
+            <button onclick="mostrarPregunta(14)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 14 -->
+        <div class="pregunta" id="pregunta14">
+            <h2>Preguntas Visuales</h2>
+            <img src="Multimedia/IMGFamilia.png" alt="Imagen de una sala de estar">
+
+            <table>
+                <tr>
+                    <th colspan="4" style="text-align: center;">Look and read. Select yes or no.</th>
+                </tr>
+                <tr>
+                    <th colspan="2" style="text-align: center">Example</th>
+                    <th>Yes </th>
+                    <th>No</th>
+                </tr>
+                <tr>
+                    <td><strong>A)</strong></td>
+                    <td>There are two armchairs in the living room. <span
+                            style="color: rgba(255, 0, 0, 0.74);">(Example)</span></td>
+                    <td><input type="radio" name="q14_1" value="S" checked disabled></td>
+                    <td><input type="radio" name="q14_1" value="N" disabled></td>
+                </tr>
+                <tr>
+                    <td><strong>B)</strong></td>
+                    <td>The big window is open. <span style="color: rgba(255, 0, 0, 0.74);">(Example)</span></td>
+                    <td><input type="radio" name="q14_2" value="S" disabled></td>
+                    <td><input type="radio" name="q14_2" value="N" disabled checked></td>
+                </tr>
+                <tr>
+                    <th colspan="2" style="text-align: center;">Questions</th>
+                    <th>Yes </th>
+                    <th>No</th>
+                </tr>
+                <tr>
+                    <td><strong>C)</strong></td>
+                    <td>The man has got black hair and glasses.</td>
+                    <td><input type="radio" name="q14_3" value="S"></td>
+                    <td><input type="radio" name="q14_3" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>D)</strong></td>
+                    <td>There is a lamp on the bookcase.</td>
+                    <td><input type="radio" name="q14_4" value="S"></td>
+                    <td><input type="radio" name="q14_4" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>E)</strong></td>
+                    <td>Some of the children are singing.</td>
+                    <td><input type="radio" name="q14_5" value="S"></td>
+                    <td><input type="radio" name="q14_5" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>F)</strong></td>
+                    <td>The woman is holding some drinks.</td>
+                    <td><input type="radio" name="q14_6" value="S"></td>
+                    <td><input type="radio" name="q14_6" value="N"></td>
+                </tr>
+                <tr>
+                    <td><strong>G)</strong></td>
+                    <td>The cat is sleeping under an armchair.</td>
+                    <td><input type="radio" name="q14_7" value="S"></td>
+                    <td><input type="radio" name="q14_7" value="N"></td>
+                </tr>
+
+            </table>
+            <button onclick="mostrarPregunta(13)">Anterior</button>
+            <button onclick="mostrarPregunta(15)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 15 -->
+        <div class="pregunta" id="pregunta15">
+            <h2> Preguntas Visuales</h2>
+            <div class="cuadro-curveado">
+                <h3>Choose a word from the box. Write the correct word next to numbers 1–5. There is one example. </h3>
+                <img src="Multimedia/IMGLagarto.png" alt="Imagen de animales">
+                <img src="Multimedia/IMGObjetos.png" alt="Imagen de objetos">
+            </div>
+            <!-- <p>Elige una palabra del recuadro y escríbela junto a los números 1-5.</p> -->
+            <p>Lots of lizards are very small
+                <select disabled>
+                    <option disabled>spiders</option>
+                    <option disabled>sand</option>
+                    <option disabled>teacher</option>
+                    <option disabled>legs</option>
+                    <option disabled>tail</option>
+                    <option disabled>trees</option>
+                    <option disabled selected>animals</option>
+                    <option disabled>ballon</option>
+
+                </select>
+                but some are really big.
+                Many lizards are green, grey or yellow. Some like eating (1)
+                <select name="q15_1">
+                    <option value="" disabled selected>Select</option>
+                    <option value="spiders">spiders</option>
+                    <option value="sand">sand</option>
+                    <option value="teacher">teacher</option>
+                    <option value="legs">legs</option>
+                    <option value="tail">tail</option>
+                    <option value="trees">trees</option>
+                    <option value="Animals" disabled>animals</option>
+                    <option value="balloon">ballon</option>
+
+                </select>
+                and some like eating fruit. A lizard can run on its four (2)
+                <select name="q15_2">
+                    <option value="" disabled selected>Select</option>
+                    <option value="spiders">spiders</option>
+                    <option value="sand">sand</option>
+                    <option value="teacher">teacher</option>
+                    <option value="legs">legs</option>
+                    <option value="tail">tail</option>
+                    <option value="trees">trees</option>
+                    <option value="animals" disabled>animals</option>
+                    <option value="balloon">ballon</option>
+                </select>
+                and it has a long (3)
+                <select name="q15_3">
+                    <option value="" disabled selected>Select</option>
+                    <option value="spiders">spiders</option>
+                    <option value="sand">sand</option>
+                    <option value="teacher">teacher</option>
+                    <option value="legs">legs</option>
+                    <option value="tail">tail</option>
+                    <option value="trees">trees</option>
+                    <option value="animals" disabled>animals</option>
+                    <option value="balloon">ballon</option>
+
+                </select>
+                at the end of its body. Many lizards live in (4)
+                <select name="q15_4">
+                    <option value="" disabled selected>Select</option>
+                    <option value="spiders">spiders</option>
+                    <option value="sand">sand</option>
+                    <option value="teacher">teacher</option>
+                    <option value="legs">legs</option>
+                    <option value="tail">tail</option>
+                    <option value="trees">trees</option>
+                    <option value="animals" disabled>animals</option>
+                    <option value="balloon">ballon</option>
+
+                </select>
+                but, at the beach, you can find some lizards on the (5)
+                <select name="q15_5">
+                    <option value="" disabled selected>Select</option>
+                    <option value="spiders">spiders</option>
+                    <option value="sand">sand</option>
+                    <option value="teacher">teacher</option>
+                    <option value="legs">legs</option>
+                    <option value="tail">tail</option>
+                    <option value="trees">trees</option>
+                    <option value="animals" disabled>animals</option>
+                    <option value="balloon">ballon</option>
+                </select>
+                Lizards love sleeping in the sun!
+            </p>
+            <button onclick="mostrarPregunta(14)">Anterior</button>
+            <button onclick="mostrarPregunta(16)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 16 -->
+        <div class="pregunta" id="pregunta16">
+            <h2>Preguntas Visuales</h2>
+            <div class="cuadro-curveado">
+                <h3>Look and read. Look and read. Choose the correct words and select from the list.<span
+                        style="color: rgba(255, 0, 0, 0.74);">There is one example</span></h3>
+                <img src="Multimedia/IMGObjetos2.png" alt="Imagen de preguntas visuales">
+            </div>
+
+            <p>1. The people in this sometimes sing or play guitars. <span style="color: rgba(255, 0, 0, 0.74);">
+                    (Example)</span>
+                <select name="q16_X" disabled>
+                    <option>a city</option>
+                    <option>a sandwich</option>
+                    <option selected>a band</option>
+                    <option>a nurse</option>
+                    <option>tea</option>
+                    <option>a driver</option>
+                    <option>a field</option>
+                    <option>an island</option>
+                </select>
+            </p>
+            <p>2. This person helps people who aren't well in hospital.
+                <select required>
+                    <option value="" selected disabled>Select</option>
+                    <option value="a city">a city</option>
+                    <option value="a sandwich">a sandwich</option>
+                    <option value="a band" disabled>a band</option>
+                    <option value="a nurse">a nurse</option>
+                    <option value="tea">tea</option>
+                    <option value="a driver">a driver</option>
+                    <option value="a field">a field</option>
+                    <option value="an island">an island</option>
+                </select>
+            </p>
+            <p>3. Some people put milk or lemon in this drink.
+                <select required name="q16_3">
+                    <option value="" selected disabled>Select</option>
+                    <option value="a city">a city</option>
+                    <option value="a sandwich">a sandwich</option>
+                    <option value="a band" disabled>a band</option>
+                    <option value="a nurse">a nurse</option>
+                    <option value="tea">tea</option>
+                    <option value="a driver">a driver</option>
+                    <option value="a field">a field</option>
+                    <option value="an island">an island</option>
+                </select>
+            </p>
+            <p>4. There are lots of cars, buses and people in this busy place.
+                <select required name="q16_4">
+                    <option value="" selected disabled>Select</option>
+                    <option value="a city">a city</option>
+                    <option value="a sandwich">a sandwich</option>
+                    <option value="a band" disabled>a band</option>
+                    <option value="a nurse">a nurse</option>
+                    <option value="tea">tea</option>
+                    <option value="a driver">a driver</option>
+                    <option value="a field">a field</option>
+                    <option value="an island">an island</option>
+                </select>
+            </p>
+            <p>5. You can put cheese or meat between bread to make this.
+                <select required name="q16_5">
+                    <option value="" selected disabled>Select</option>
+                    <option value="a city">a city</option>
+                    <option value="a sandwich">a sandwich</option>
+                    <option value="a band" disabled>a band</option>
+                    <option value="a nurse">a nurse</option>
+                    <option value="tea">tea</option>
+                    <option value="a driver">a driver</option>
+                    <option value="a field">a field</option>
+                    <option value="an island">an island</option>
+                </select>
+            </p>
+            <p>6. This is part of a farm where you often see vegetable plants.
+                <select required name="q16_6">
+                    <option value="" selected disabled>Select</option>
+                    <option value="a city">a city</option>
+                    <option value="a sandwich">a sandwich</option>
+                    <option value="a band" disabled>a band</option>
+                    <option value="a nurse">a nurse</option>
+                    <option value="tea">tea</option>
+                    <option value="a driver">a driver</option>
+                    <option value="a field">a field</option>
+                    <option value="an island">an island</option>
+                </select>
+            </p>
+            <button onclick="mostrarPregunta(15)">Anterior</button>
+            <button onclick="mostrarPregunta()">Finalizar</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Todos los derechos de autor y propiedad intelectual son respetados. <br>
+        Contenido descargado de la plataforma Proyecto Descartes <br>
+        <a href="#" target="_blank">Política de privacidad</a> |
+        <a href="#" target="_blank">Términos de uso</a>
+    </footer>
+    <script src="./ScriptNivel1.js"></script>
+</body>
+
+</html>

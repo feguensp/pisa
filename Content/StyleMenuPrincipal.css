@@ -1,0 +1,157 @@
+    /********************************************************
+     1) RESET Y ESTILOS BÁSICOS
+    ********************************************************/
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    /********************************************************
+       2) BODY: FONDO DEGRADADO
+      ********************************************************/
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(45deg, #dae7f5, #ebf2fa);
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 90px;
+        /* Espacio para el footer */
+    }
+
+    /********************************************************
+       3) LOGO EN LA ESQUINA SUPERIOR DERECHA
+      ********************************************************/
+    .logo {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .logo img {
+        width: 120px;
+        /* Tamaño más pequeño */
+        height: auto;
+    }
+
+    /********************************************************
+       4) TEXTO DE BIENVENIDA
+      ********************************************************/
+    .bienvenida {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 1.5em;
+        color: #1a5276;
+        /* Azul oscuro */
+        font-weight: bold;
+        animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /********************************************************
+       5) CONTENEDOR DE BOTONES
+      ********************************************************/
+    .contenedor-botones {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    button {
+        width: 280px;
+        padding: 12px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 8px;
+        background: #3498db;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+        background: #2980b9;
+    }
+
+    button:disabled {
+        background: #bdc3c7;
+        cursor: not-allowed;
+    }
+
+    .home-button {
+        background: #e74c3c;
+    }
+
+    .home-button:hover {
+        background: #c0392b;
+    }
+
+    /********************************************************
+       6) FOOTER FIJO CON LOGOS
+      ********************************************************/
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 15px 20px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #666;
+        backdrop-filter: blur(8px);
+        z-index: 2;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .logos-pequenos {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .logos-pequenos img {
+        height: 30px;
+        opacity: 0.8;
+        transition: opacity 0.3s;
+    }
+
+    .logos-pequenos img:hover {
+        opacity: 1;
+    }
+
+    footer a {
+        color: #3498db;
+        text-decoration: none;
+        margin: 0 8px;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    .logos-pequenos img[alt="OEI"] {
+        height: 15px;
+        margin-top: 8px;
+    }
